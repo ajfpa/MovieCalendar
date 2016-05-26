@@ -1,6 +1,7 @@
 package com.example.andre.MovieCalendar;
 
 import android.content.Intent;
+import android.support.v4.widget.DrawerLayout;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
@@ -14,9 +15,11 @@ import com.example.andre.MovieCalendar.utils.TestLocation;
 public class DrawerItemListener implements ListView.OnItemClickListener{
 
     MainActivity activity;
+    DrawerLayout mDrawerLayout;
 
-    public DrawerItemListener(MainActivity activity) {
+    public DrawerItemListener(MainActivity activity, DrawerLayout mDrawerLayout) {
         this.activity = activity;
+        this.mDrawerLayout=mDrawerLayout;
 
     }
 
@@ -49,6 +52,7 @@ public class DrawerItemListener implements ListView.OnItemClickListener{
             Intent i = new Intent(activity.getApplicationContext(), AboutActivity.class);
             activity.startActivity(i);
         }
+        mDrawerLayout.closeDrawers();
 
     }
 }

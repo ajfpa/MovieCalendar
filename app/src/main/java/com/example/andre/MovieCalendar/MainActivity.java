@@ -175,11 +175,8 @@ public class MainActivity extends AppCompatActivity {
         mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
         mDrawerList = (ListView) findViewById(R.id.left_drawer);
 
-        // Set the adapterList for the list view
         mDrawerList.setAdapter(new ArrayAdapter<>(getApplicationContext(),R.layout.drawer_list_item,drawerOptions));
-
-        // Set the list's click listener
-        mDrawerList.setOnItemClickListener(new DrawerItemListener(this));
+        mDrawerList.setOnItemClickListener(new DrawerItemListener(this,mDrawerLayout));
 
         lvMovies = (ListView) findViewById(R.id.lvMovies);
         grdMovies = (GridView) findViewById(R.id.grdMovies);
@@ -318,8 +315,6 @@ public class MainActivity extends AppCompatActivity {
         grdMovies.setAdapter(adapterGrid);
 
         mDrawerList.setAdapter(new ArrayAdapter<>(getApplicationContext(), R.layout.drawer_list_item, drawerOptions));
-
-        mDrawerList.setOnItemClickListener(new DrawerItemListener(this));
 
         if(lcTheaters==null){
             lcTheaters=new ArrayList<Theater>();

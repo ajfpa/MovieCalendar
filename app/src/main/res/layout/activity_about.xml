@@ -62,7 +62,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="António Pereira 62382 METI"
+            android:text="António Pereira 60382 METI"
             android:id="@+id/A62382"
             android:layout_gravity="center_horizontal" />
     </LinearLayout>
