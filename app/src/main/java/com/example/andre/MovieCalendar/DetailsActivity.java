@@ -2,22 +2,26 @@ package com.example.andre.MovieCalendar;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v4.app.DialogFragment;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.text.method.ScrollingMovementMethod;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.ImageView;
+import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.andre.MovieCalendar.utils.DownloadImageTask;
+import com.example.andre.MovieCalendar.utils.FragmentTheaters;
 import com.example.andre.MovieCalendar.view.Movie;
 
 public class DetailsActivity extends AppCompatActivity {
 
     protected TextView tvNome, tvData, tvDirector, tvStarring, tvIntro;
     protected ImageView ivCover;
+    protected ListView listView;
     protected long id;
     protected Movie movie;
     Toolbar toolBar;
@@ -47,6 +51,8 @@ public class DetailsActivity extends AppCompatActivity {
                 addFavorite();
                 if(favorite){
                     toolBar.getMenu().findItem(R.id.fav).setIcon(R.mipmap.ic_favorite);
+                    DialogFragment newFragment = new FragmentTheaters(this, movie.getTheaters(), listView);
+                    newFragment.show(getSupportFragmentManager(), "theaters");
                 }else {
                     toolBar.getMenu().findItem(R.id.fav).setIcon(R.mipmap.ic_not_favorite);
                 }
@@ -69,6 +75,7 @@ public class DetailsActivity extends AppCompatActivity {
         tvStarring = (TextView) findViewById(R.id.tv_starring);
         tvIntro = (TextView) findViewById(R.id.tv_description);
         ivCover = (ImageView) findViewById(R.id.iv_movieCover);
+        //listView = (ListView) findViewById(R.id.movie_theaters_list);
 
         Intent i = getIntent();
         movie = i.getParcelableExtra("movie");
