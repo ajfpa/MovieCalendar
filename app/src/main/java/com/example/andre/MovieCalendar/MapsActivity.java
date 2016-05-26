@@ -18,6 +18,15 @@ import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 
+import org.json.JSONArray;
+import org.json.JSONObject;
+
+import java.io.BufferedReader;
+import java.io.DataOutputStream;
+import java.io.InputStreamReader;
+import java.net.HttpURLConnection;
+import java.net.URL;
+import java.util.HashMap;
 import java.util.Map;
 
 /**
@@ -66,13 +75,14 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
 
 
     private class getPOIs extends AsyncTask<String, Void, String> {
+        String result = "";
         private ProgressDialog dialog = new ProgressDialog(MapsActivity.this);
 
 
         @Override
         protected void onPreExecute()
         {
-            dialog.setMessage("Getting POIs from server...");
+            dialog.setMessage("Getting Theaters from server...");
             dialog.show();
         }
 
@@ -82,15 +92,25 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
         {
             String response = null;
             try {
-                /*HttpClient httpclient = new DefaultHttpClient();
-                Log.i("guideMe", "Asking = " + "http://192.168.1.113:3000/poi/
-                        range/"+latitude+"/"+longitude+"/"+myRange);
-                        HttpResponse httpResponse = httpclient.execute(new HttpGet("http://
-                192.168.1.113:3000/poi/range/"+latitude+"/"+longitude+"/"+myRange));
-                BufferedReader reader = new BufferedReader(new
-                        InputStreamReader(httpResponse.getEntity().getContent(), "UTF-8"));
-                response = reader.readLine();
-                Log.i("guideMe", "Response = " + response);*/
+                URL url = new URL("http://andregloria.com/daam/theater.php");
+
+                HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+                connection.setRequestMethod("POST");
+                connection.setRequestProperty("USER-AGENT", "Mozilla/5.0");
+                connection.setRequestProperty("ACCEPT-LANGUAGE", "en-US,en;0.5");
+                connection.setDoOutput(true);
+
+                BufferedReader br = new BufferedReader(new InputStreamReader(connection.getInputStream()));
+                String line = "";
+                StringBuilder responseOutput = new StringBuilder();
+
+                while ((line = br.readLine()) != null) {
+                    responseOutput.append(line);
+                }
+                br.close();
+
+                result = responseOutput.toString();
+                System.out.println(result);
 
             } catch(Exception e) {
                 return "-ERR";
@@ -104,20 +124,26 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
             try {
 
 
-                MarkerOptions marker = new MarkerOptions()
-                        .position(new LatLng(38.728082, -9.218374))
-                        .title("Alegro Alfragide")
-                        .snippet("Alegro Alfragide");
-
-                marker.icon(BitmapDescriptorFactory.fromResource(R.mipmap.ic_cinema_marker));
-
-                g_map.addMarker(marker);
-
-
 
                 // now, we have to handle all the necessary results and add them to the map
-                /*JSONObject jobj = new JSONObject(result);
-                if(jobj.get("status").toString().compareTo("OK")==0) {
+                JSONObject jobj = new JSONObject(this.result);
+                JSONArray poi = jobj.getJSONArray("theaters");
+                for(int i=0; i<poi.length(); i++) {
+                    JSONObject t_poi = poi.getJSONObject(i);
+                    MarkerOptions marker = new MarkerOptions()
+                            .position(new LatLng(Double.parseDouble(t_poi.getString("latitude")), Double.parseDouble(t_poi.getString("longitude"))))
+                            .title(t_poi.getString("name"))
+                            .snippet(t_poi.getString("location"));
+
+                    marker.icon(BitmapDescriptorFactory.fromResource(R.mipmap.ic_cinema_marker));
+
+                    g_map.addMarker(marker);
+
+                }
+
+
+
+                /*if(jobj.get("status").toString().compareTo("OK")==0) {
                     JSONArray poi = jobj.getJSONArray("poi");
                     hmap = new HashMap<Marker, Integer>();
                     for(int i=0; i<poi.length(); i++) {
@@ -133,6 +159,7 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
                     }
                 }*/
             } catch (Exception e) {
+                Log.i("guideMe", "erro");
             }
         }
     }
