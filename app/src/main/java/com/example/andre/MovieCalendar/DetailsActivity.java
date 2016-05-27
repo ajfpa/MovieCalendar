@@ -56,7 +56,7 @@ public class DetailsActivity extends AppCompatActivity {
                     if(!movie.isOnDisplay()){
                         DialogFragment dateFragment = new FragmentMovieNotificationPicker();
                         FragmentMovieNotificationPicker m = (FragmentMovieNotificationPicker) dateFragment;
-                        m.setDateScheduleMovie(scheduleMovie);
+                        m.setDateScheduleMovie(scheduleMovie,movie.getNome());
                         dateFragment.show(getSupportFragmentManager(), "timePicker");
                     }else{
                     DialogFragment theaterFragment = new FragmentTheaters(this, movie.getTheaters(), listView);

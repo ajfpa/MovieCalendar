@@ -16,6 +16,7 @@ import java.util.Calendar;
 public class FragmentMovieNotificationPicker extends DialogFragment implements DatePickerDialog.OnDateSetListener{
 
     private ScheduleMovie scheduleMovie;
+    private String movieName;
 
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
@@ -32,12 +33,13 @@ public class FragmentMovieNotificationPicker extends DialogFragment implements D
         timeFragment.setDay(dayOfMonth);
         timeFragment.setMonth(monthOfYear);
         timeFragment.setYear(year);
-        timeFragment.setTimeScheduleMovie(scheduleMovie);
+        timeFragment.setTimeScheduleMovie(scheduleMovie,movieName);
         timeFragment.show(getFragmentManager(),"timePicker");
     }
 
-    public void setDateScheduleMovie(ScheduleMovie scheduleMovie) {
+    public void setDateScheduleMovie(ScheduleMovie scheduleMovie,String movieName) {
         this.scheduleMovie = scheduleMovie;
+        this.movieName=movieName;
     }
 
     public static class MovieTimePicker extends DialogFragment implements TimePickerDialog.OnTimeSetListener{
@@ -47,6 +49,7 @@ public class FragmentMovieNotificationPicker extends DialogFragment implements D
         private int month;
         private int year;
         private ScheduleMovie scheduleMovie;
+        private String movieName;
 
         @Override
         public Dialog onCreateDialog(Bundle savedInstanceState) {
@@ -63,7 +66,7 @@ public class FragmentMovieNotificationPicker extends DialogFragment implements D
             dateChosen.set(Calendar.HOUR_OF_DAY,hourOfDay);
             dateChosen.set(Calendar.MINUTE,minute);
             dateChosen.set(Calendar.SECOND,0);
-            scheduleMovie.setMovieNotificationDate(dateChosen);
+            scheduleMovie.setMovieNotificationDate(dateChosen,movieName);
 
         }
 
@@ -79,8 +82,9 @@ public class FragmentMovieNotificationPicker extends DialogFragment implements D
             this.year = year;
         }
 
-        protected void setTimeScheduleMovie(ScheduleMovie scheduleMovie) {
+        protected void setTimeScheduleMovie(ScheduleMovie scheduleMovie, String movieName) {
             this.scheduleMovie = scheduleMovie;
+            this.movieName=movieName;
         }
     }
 }
