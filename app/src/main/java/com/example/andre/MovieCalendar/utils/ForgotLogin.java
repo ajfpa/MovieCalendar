@@ -2,12 +2,8 @@ package com.example.andre.MovieCalendar.utils;
 
 import android.app.Activity;
 import android.app.ProgressDialog;
-import android.content.Intent;
 import android.os.AsyncTask;
 import android.widget.Toast;
-
-import com.example.andre.MovieCalendar.LoginActivity;
-import com.example.andre.MovieCalendar.MainActivity;
 
 import java.io.BufferedReader;
 import java.io.DataOutputStream;

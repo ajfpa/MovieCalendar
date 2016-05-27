@@ -7,6 +7,7 @@ import android.view.View;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -17,6 +18,7 @@ public class LoginActivity extends Activity {
 
     Button buttonLogin, guestButton;
     TextView registerScreen, recoveryScreen;
+    ImageButton aboutButton;
     EditText pass;
     AutoCompleteTextView email=null;
     private Toast toast;
@@ -33,6 +35,7 @@ public class LoginActivity extends Activity {
         recoveryScreen = (TextView) findViewById(R.id.passres);
         buttonLogin = (Button) findViewById(R.id.login);
         guestButton = (Button) findViewById(R.id.guest);
+        aboutButton = (ImageButton) findViewById(R.id.aboutButton);
 
         buttonLogin.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -90,6 +93,15 @@ public class LoginActivity extends Activity {
             public void onClick(View v) {
                 // Switching to Register screen
                 Intent i = new Intent(getApplicationContext(), ForgotActivity.class);
+                startActivity(i);
+            }
+        });
+
+        aboutButton.setOnClickListener(new View.OnClickListener() {
+
+            public void onClick(View v) {
+                // Switching to Register screen
+                Intent i = new Intent(getApplicationContext(), AboutActivity.class);
                 startActivity(i);
             }
         });
