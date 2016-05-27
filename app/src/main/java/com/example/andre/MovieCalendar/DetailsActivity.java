@@ -6,16 +6,19 @@ import android.support.v4.app.DialogFragment;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.text.method.ScrollingMovementMethod;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.ImageView;
 import android.widget.ListView;
+import android.widget.RatingBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.andre.MovieCalendar.utils.DownloadImageTask;
 import com.example.andre.MovieCalendar.utils.FragmentTheaters;
 import com.example.andre.MovieCalendar.utils.FragmentMovieNotificationPicker;
+import com.example.andre.MovieCalendar.utils.ImdbApiCall;
 import com.example.andre.MovieCalendar.utils.ScheduleMovie;
 import com.example.andre.MovieCalendar.view.Movie;
 
@@ -67,6 +70,7 @@ public class DetailsActivity extends AppCompatActivity {
                 }
                 break;
             case android.R.id.home:
+                scheduleMovie.unbindService();
                 onBackPressed();
                 break;
         }
@@ -77,6 +81,7 @@ public class DetailsActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.movie_view);
+
 
         scheduleMovie = new ScheduleMovie(this);
         scheduleMovie.bindService();
@@ -97,12 +102,14 @@ public class DetailsActivity extends AppCompatActivity {
         Intent i = getIntent();
         movie = i.getParcelableExtra("movie");
         favorite = i.getBooleanExtra("favorite", false);
+        Log.d("IMDB_KEY","The key is: " + movie.getImdbKey());
+        new ImdbApiCall(this,movie.getImdbKey()).execute();
 
         tvNome.setText(movie.getNome());
         tvData.setText(movie.getData());
         tvDirector.setText("Director: "+ movie.getDirector());
         tvStarring.setText("Starring: " + movie.getStarring());
-        tvIntro.setText("Description:\n " + movie.getIntro());
+        tvIntro.setText("Description:\n" + movie.getIntro());
         tvStarring.setMovementMethod(new ScrollingMovementMethod());
         tvIntro.setMovementMethod(new ScrollingMovementMethod());
         if(movie.getImageCover()==null){
@@ -161,4 +168,12 @@ public class DetailsActivity extends AppCompatActivity {
         super.onBackPressed();
     }
 
+
+    public Movie getMovie() {
+        return movie;
+    }
+    public void setRating(double rating){
+        RatingBar ratingBar = (RatingBar) findViewById(R.id.movie_ratingBar);
+        ratingBar.setRating(new Float(rating));
+    }
 }

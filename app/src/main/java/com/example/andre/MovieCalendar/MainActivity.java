@@ -33,6 +33,7 @@ import com.example.andre.MovieCalendar.utils.MovieDatasource;
 import com.example.andre.MovieCalendar.view.Movie;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ExecutionException;
 
@@ -281,22 +282,23 @@ public class MainActivity extends AppCompatActivity {
     public void addToListView(){
 
 
+        lcFav= new ArrayList<Movie>();
+        List<String> favorites=ds.getAll();
+        /*if (new CheckConnection(MainActivity.this).isConnected()) {
+            new FavoriteMovieScraper(lcFav,ds.getAll(),this).execute();
+        }*/
+
         if(lcMovies ==null) {
             lcMovies= new ArrayList<Movie>();
             if (new CheckConnection(MainActivity.this).isConnected()) {
-                new CurrentMoviesScraper(lcMovies).execute();
+                new CurrentMoviesScraper(lcMovies,favorites,this).execute();
             }
-        }
-
-        lcFav= new ArrayList<Movie>();
-        if (new CheckConnection(MainActivity.this).isConnected()) {
-            new FavoriteMovieScraper(lcFav, ds.getAll()).execute();
         }
 
         if(lcUpcoming==null){
             lcUpcoming=new ArrayList<Movie>();
             if (new CheckConnection(MainActivity.this).isConnected()) {
-                new FutureFilmsScraper(lcUpcoming).execute();
+                new FutureFilmsScraper(lcUpcoming,favorites,this).execute();
             }
         }
 
@@ -308,7 +310,7 @@ public class MainActivity extends AppCompatActivity {
             lcCurrent=new ArrayList<Movie>();
         }
 
-        lcCurrent.addAll(lcFav);
+        lcCurrent=lcFav;
         adapterList = new MovieAdapterList(MainActivity.this, lcCurrent);
         lvMovies.setAdapter(adapterList);
         adapterGrid = new MovieAdapterGrid(MainActivity.this,lcCurrent);
@@ -342,9 +344,12 @@ public class MainActivity extends AppCompatActivity {
 
     public void notifyAdapterOfDataChanged(){
         if(grid_visible){
+            Log.d("FAVORITE_MAIN", "size of fav list is: "+ lcFav.size() + " size of adapter list is : " + adapterGrid.getMovieList().size());
             adapterGrid.notifyDataSetChanged();
-        }else
-            adapterList.notifyDataSetChanged();
+
+        }else{
+            Log.d("FAVORITE_MAIN", "size of fav list is: "+ lcFav.size() + " size of adapter list is : " + adapterGrid.getMovieList().size());
+            adapterList.notifyDataSetChanged();}
     }
 
     public ArrayList<Movie> getLcFav() {
@@ -365,5 +370,9 @@ public class MainActivity extends AppCompatActivity {
 
     public ArrayList<Theater> getLcTheaters() {
         return lcTheaters;
+    }
+
+    public void setLcCurrent(ArrayList<Movie> lcCurrent) {
+        this.lcCurrent = lcCurrent;
     }
 }

@@ -48,14 +48,17 @@
                     android:layout_height="wrap_content"
                     android:id="@+id/movie_ratingBar"
                     android:layout_below="@+id/tv_movieTitle"
-                    android:layout_toEndOf="@+id/iv_movieCover" />
+                    android:layout_toEndOf="@+id/iv_movieCover"
+                    android:progressBackgroundTint="#FFF"
+                    android:progressTint="#FFD700"/>
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:id="@+id/tv_movieReleaseDate"
                     android:layout_below="@+id/movie_ratingBar"
-                    android:layout_toEndOf="@+id/iv_movieCover" />
+                    android:layout_toEndOf="@+id/iv_movieCover"
+                   />
 
                 <TextView
                     android:layout_width="wrap_content"

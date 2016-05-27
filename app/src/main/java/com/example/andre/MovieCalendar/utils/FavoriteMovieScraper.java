@@ -2,6 +2,7 @@ package com.example.andre.MovieCalendar.utils;
 
 import android.os.AsyncTask;
 
+import com.example.andre.MovieCalendar.MainActivity;
 import com.example.andre.MovieCalendar.view.Movie;
 
 import org.jsoup.Jsoup;
@@ -22,10 +23,12 @@ public class FavoriteMovieScraper extends AsyncTask<Void, Void, Void> {
     private Element htmlContentPrimary;
     private List movieList;
     private List<String> favorites;
+    private MainActivity mainActivity;
 
-    public FavoriteMovieScraper(List movieAdapter, List<String> favorites){
+    public FavoriteMovieScraper(List movieAdapter, List<String> favorites, MainActivity mainActivity){
         this.movieList=movieAdapter;
         this.favorites = favorites;
+        this.mainActivity=mainActivity;
     }
 
 
@@ -59,6 +62,10 @@ public class FavoriteMovieScraper extends AsyncTask<Void, Void, Void> {
         return null;
     }
 
+    @Override
+    protected void onPostExecute(Void aVoid) {
+        mainActivity.notifyAdapterOfDataChanged();
+    }
 
     private boolean isFavorite(String title){
         for(int i = 0; i < favorites.size(); i++){

@@ -37,17 +37,20 @@ public class DetailedMovieInfo extends AsyncTask<Movie,Void,Void> {
             String director=tempDoc.select("span[itemprop=director]").text();
             String starring=tempDoc.select("span[itemprop=actors] > a").text();
             Elements cinemas = tempDoc.select("#filmeInfoDivSessoes > .coluna > .colunaInside > ul > li.zsmall");
+            String imdbUrl= tempDoc.select("[itemprop=sameAs]").text();
             for (Element element :cinemas){
                 Log.d("Cinemas","O cinema é : " +element.text() );
                 movieData.getTheaters().add(element.text());
             }
+            String[] key = imdbUrl.split("/");
             movieData.setData(data);
             movieData.setCover(cover);
             movieData.setIntro(description);
             movieData.setDirector(director);
             movieData.setStarring(starring);
-            //Log.d("OUTPUT","O nome do filme é: " + name +" sai a: " + data + " o link da imagem é : "+ cover + " a sinopsia é: " + description + " o diretor é : " + director + " e entram os seguintes atores: " + starring );
-
+            movieData.setImdbKey(key[key.length-1]);
+           // Log.d("OUTPUT","O nome do filme é: " + name +" sai a: " + data + " o link da imagem é : "+ cover + " a sinopsia é: " + description + " o diretor é : " + director + " e entram os seguintes atores: " + starring );
+            Log.d("IMDB", "O URL do imdb para este filme é : " + movieData.getImdbKey());
         } catch (IOException e) {
             e.printStackTrace();
         }

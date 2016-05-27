@@ -26,20 +26,22 @@ public class DrawerItemListener implements ListView.OnItemClickListener{
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
         if(position==0) {
-            activity.getLcCurrent().clear();
-            activity.getLcCurrent().addAll(activity.getLcFav());
+          /*  activity.getLcCurrent().clear();
+            activity.getLcCurrent().addAll(activity.getLcFav());*/
+            activity.setLcCurrent(activity.getLcFav());
             activity.notifyAdapterOfDataChanged();
             TextView tv_movie= (TextView)activity.findViewById(R.id.tv_Movies);
             tv_movie.setText("Favorite");
         }else if (position==1){
-            activity.getLcCurrent().clear();
-            activity.getLcCurrent().addAll(activity.getLcMovies());
-            activity.notifyAdapterOfDataChanged();
+            /*activity.getLcCurrent().addAll(activity.getLcMovies());
+            activity.notifyAdapterOfDataChanged();*/
+            activity.setLcCurrent(activity.getLcMovies());
             TextView tv_movie= (TextView)activity.findViewById(R.id.tv_Movies);
             tv_movie.setText("On Cinema");
         }else if(position==2){
-            activity.getLcCurrent().clear();
-            activity.getLcCurrent().addAll(activity.getLcUpcoming());
+           /* activity.getLcCurrent().clear();
+            activity.getLcCurrent().addAll(activity.getLcUpcoming());*/
+            activity.setLcCurrent(activity.getLcUpcoming());
             activity.notifyAdapterOfDataChanged();
             TextView tv_movie= (TextView)activity.findViewById(R.id.tv_Movies);
             tv_movie.setText("Upcoming");

@@ -13,11 +13,13 @@ import java.util.List;
 public class Movie implements Parcelable {
 
     protected long id;
-    protected String nome, data, intro, cover, director, starring, redirectUrl;
+    protected String nome, data, intro, cover, director, starring, redirectUrl, imdbKey;
     protected int favorite=0;
     protected Bitmap imageCover;
     protected List<String> theaters;
     protected boolean onDisplay;
+    protected double rating;
+
 
     public Movie(long id, String nome, String data, String intro, String cover, String director, String starring, int favorite) {
         this.id = id;
@@ -48,10 +50,12 @@ public class Movie implements Parcelable {
         director = in.readString();
         starring = in.readString();
         redirectUrl = in.readString();
+        imdbKey = in.readString();
         favorite = in.readInt();
         imageCover = in.readParcelable(Bitmap.class.getClassLoader());
         theaters = in.createStringArrayList();
         onDisplay = in.readByte() != 0;
+        rating = in.readDouble();
     }
 
     @Override
@@ -64,10 +68,12 @@ public class Movie implements Parcelable {
         dest.writeString(director);
         dest.writeString(starring);
         dest.writeString(redirectUrl);
+        dest.writeString(imdbKey);
         dest.writeInt(favorite);
         dest.writeParcelable(imageCover, flags);
         dest.writeStringList(theaters);
         dest.writeByte((byte) (onDisplay ? 1 : 0));
+        dest.writeDouble(rating);
     }
 
     @Override
@@ -171,5 +177,21 @@ public class Movie implements Parcelable {
 
     public boolean isOnDisplay() {
         return onDisplay;
+    }
+
+    public String getImdbKey() {
+        return imdbKey;
+    }
+
+    public void setImdbKey(String imdbKey) {
+        this.imdbKey = imdbKey;
+    }
+
+    public void setRating(double rating) {
+        this.rating = rating;
+    }
+
+    public double getRating() {
+        return rating;
     }
 }

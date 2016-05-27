@@ -87,10 +87,8 @@ public class MovieAdapterList extends ArrayAdapter<Movie> {
         return movieList;
     }
 
-    /*public void setMovieList(List<Movie> movieList) {
-        this.movieList.clear();
-        this.movieList.addAll(movieList);
-        notifyDataSetChanged();
-    }*/
+    public void setMovieList(List<Movie> movieList) {
+        this.movieList=movieList;
+    }
 }
 

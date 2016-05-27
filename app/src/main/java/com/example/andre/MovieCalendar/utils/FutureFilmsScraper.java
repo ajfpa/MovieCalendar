@@ -2,6 +2,7 @@ package com.example.andre.MovieCalendar.utils;
 
 import android.os.AsyncTask;
 
+import com.example.andre.MovieCalendar.MainActivity;
 import com.example.andre.MovieCalendar.view.Movie;
 
 import org.jsoup.Jsoup;
@@ -9,6 +10,7 @@ import org.jsoup.nodes.Document;
 import org.jsoup.select.Elements;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 import java.util.HashMap;
@@ -23,11 +25,16 @@ public class FutureFilmsScraper extends AsyncTask<Void, Void, Void> {
 
     private String htmlPageUrl = "http://filmspot.pt/estreias/";
     private Document htmlDocument;
-    private List movieList;
-    HashMap<String,Movie> webList;
+    private List movieList,favoritesList;
+    private HashMap<String,Movie> webList;
+    private List<String> favorites;
+    private MainActivity mainActivity;
 
-    public FutureFilmsScraper(List movieList){
+    public FutureFilmsScraper(List movieList,List<String> favorites, MainActivity mainActivity){
         this.movieList = movieList;
+        this.favorites=favorites;
+        this.favoritesList=new ArrayList();
+        this.mainActivity=mainActivity;
     }
 
     @Override
@@ -37,8 +44,23 @@ public class FutureFilmsScraper extends AsyncTask<Void, Void, Void> {
 
     @Override
     protected void onPostExecute(Void avoid) {
-        movieList.addAll(webList.values());
 
+        movieList.addAll(webList.values());
+        mainActivity.notifyAdapterOfDataChanged();
+        if(favorites.size()!=0){
+            setFavorites();
+            mainActivity.getLcFav().addAll(favoritesList);
+            mainActivity.notifyAdapterOfDataChanged();
+        }
+
+    }
+
+    private void setFavorites(){
+        for(int i = 0; i < favorites.size(); i++){
+            if(webList.containsKey(favorites.get(i))){
+                favoritesList.add(webList.get(favorites.get(i)));
+            }
+        }
     }
 
     @Override
@@ -80,5 +102,6 @@ public class FutureFilmsScraper extends AsyncTask<Void, Void, Void> {
 
         return null;
     }
+
 
 }
