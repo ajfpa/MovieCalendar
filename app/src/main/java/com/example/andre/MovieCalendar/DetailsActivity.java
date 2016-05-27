@@ -56,7 +56,7 @@ public class DetailsActivity extends AppCompatActivity {
                     if(!movie.isOnDisplay()){
                         DialogFragment dateFragment = new FragmentMovieNotificationPicker();
                         FragmentMovieNotificationPicker m = (FragmentMovieNotificationPicker) dateFragment;
-                        m.setDateScheduleMovie(scheduleMovie);
+                        m.setDateScheduleMovie(scheduleMovie,movie.getNome());
                         dateFragment.show(getSupportFragmentManager(), "timePicker");
                     }else{
                         DialogFragment theaterFragment = new FragmentTheaters(this, movie.getTheaters(), listView);
@@ -65,6 +65,9 @@ public class DetailsActivity extends AppCompatActivity {
                 }else {
                     toolBar.getMenu().findItem(R.id.fav).setIcon(R.mipmap.ic_not_favorite);
                 }
+                break;
+            case android.R.id.home:
+                onBackPressed();
                 break;
         }
         return super.onOptionsItemSelected(item);
@@ -80,6 +83,8 @@ public class DetailsActivity extends AppCompatActivity {
 
         toolBar = (Toolbar) findViewById(R.id.toolBar);
         setSupportActionBar(toolBar);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setDisplayShowHomeEnabled(true);
 
         tvNome = (TextView) findViewById(R.id.tv_movieTitle);
         tvData = (TextView) findViewById(R.id.tv_movieReleaseDate);
@@ -143,4 +148,17 @@ public class DetailsActivity extends AppCompatActivity {
         scheduleMovie.unbindService();
         super.onStop();
     }
+
+    @Override
+    protected void onPause() {
+        scheduleMovie.unbindService();
+        super.onPause();
+    }
+
+    @Override
+    public void onBackPressed() {
+        scheduleMovie.unbindService();
+        super.onBackPressed();
+    }
+
 }

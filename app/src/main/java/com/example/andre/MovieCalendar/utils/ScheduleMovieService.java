@@ -33,7 +33,7 @@ public class ScheduleMovieService extends Service {
         return START_STICKY;
     }
 
-    public void setMovieNotification(Calendar movieDate) {
-        new MovieAlarm(this, movieDate).execute();
+    public void setMovieNotification(Calendar movieDate,String movieName) {
+        new MovieAlarm(this, movieDate,movieName).execute();
     }
 }

@@ -35,8 +35,8 @@ public class ScheduleMovie {
         this.movieContext=movieContext;
     }
 
-    public void setMovieNotificationDate(Calendar movieDate){
-        boundMovieService.setMovieNotification(movieDate);
+    public void setMovieNotificationDate(Calendar movieDate,String movieName){
+        boundMovieService.setMovieNotification(movieDate,movieName);
     }
 
     public void bindService(){

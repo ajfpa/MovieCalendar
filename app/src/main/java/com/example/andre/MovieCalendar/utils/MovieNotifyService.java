@@ -59,7 +59,8 @@ public class MovieNotifyService extends Service{
                 new NotificationCompat.Builder(this)
                         .setSmallIcon(movieIcon)
                         .setContentTitle(title)
-                        .setContentText(message);
+                        .setContentText(message)
+                        .setStyle(new NotificationCompat.BigTextStyle().bigText(message));
         notificationManager.notify(NOTIFICATION_ID,movieNotification.build());
         stopSelf();
 
