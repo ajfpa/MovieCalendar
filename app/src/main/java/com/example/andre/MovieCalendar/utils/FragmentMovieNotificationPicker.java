@@ -54,9 +54,9 @@ public class FragmentMovieNotificationPicker extends DialogFragment implements D
         @Override
         public Dialog onCreateDialog(Bundle savedInstanceState) {
             final Calendar calendar = Calendar.getInstance();
-            int hour = calendar.get(Calendar.HOUR);
+            int hour = calendar.get(Calendar.HOUR_OF_DAY);
             int minutes = calendar.get(Calendar.MINUTE);
-            return new TimePickerDialog(getActivity(),this,hour,minutes, DateFormat.is24HourFormat(getActivity()));
+            return new TimePickerDialog(getActivity(),this,hour,minutes,DateFormat.is24HourFormat(getActivity()));
         }
 
         @Override
