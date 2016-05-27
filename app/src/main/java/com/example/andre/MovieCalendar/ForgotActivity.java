@@ -11,13 +11,15 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.andre.MovieCalendar.utils.CheckConnection;
+import com.example.andre.MovieCalendar.utils.ForgotLogin;
 import com.example.andre.MovieCalendar.utils.TestLogin;
 
-public class LoginActivity extends Activity {
+/**
+ * Created by ANDRE on 27/05/16.
+ */
+public class ForgotActivity extends Activity {
 
-    Button buttonLogin, guestButton;
-    TextView registerScreen, recoveryScreen;
-    EditText pass;
+    Button forgotButton, loginButton;
     AutoCompleteTextView email=null;
     private Toast toast;
     CheckConnection connection;
@@ -26,33 +28,28 @@ public class LoginActivity extends Activity {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         // setting default screen to login.xml
-        setContentView(R.layout.activity_login);
-        registerScreen = (TextView) findViewById(R.id.signUp);
+        setContentView(R.layout.activity_forgot);
         email = (AutoCompleteTextView) findViewById(R.id.email);
-        pass = (EditText) findViewById(R.id.password);
-        recoveryScreen = (TextView) findViewById(R.id.passres);
-        buttonLogin = (Button) findViewById(R.id.login);
-        guestButton = (Button) findViewById(R.id.guest);
+        forgotButton = (Button) findViewById(R.id.newPassword);
+        loginButton = (Button) findViewById(R.id.backLogin);
 
-        buttonLogin.setOnClickListener(new View.OnClickListener() {
+        forgotButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 //Check Connection
                 connection = new CheckConnection(getApplicationContext());
                 if(connection.isConnected()) {
                     String userText = email.getText().toString();
-                    String passText = pass.getText().toString();
 
-                    if(userText.equals("") || passText.equals("")){
+                    if(userText.equals("")){
                         if (toast == null || toast.getView().getWindowVisibility() != View.VISIBLE) {
                             toast = Toast.makeText(getApplicationContext(), "Enter all fields!", Toast.LENGTH_LONG);
                             toast.show();
                         }
                     }else {
-                        new TestLogin(LoginActivity.this, userText, passText).execute();
+                        new ForgotLogin(ForgotActivity.this, userText).execute();
                     }
                 }else{
-
                     if (toast == null || toast.getView().getWindowVisibility() != View.VISIBLE) {
                         toast = Toast.makeText(getApplicationContext(), "No Internet Connection", Toast.LENGTH_LONG);
                         toast.show();
@@ -63,36 +60,13 @@ public class LoginActivity extends Activity {
         });
 
         // Enter as guest
-        guestButton.setOnClickListener(new View.OnClickListener() {
+        loginButton.setOnClickListener(new View.OnClickListener() {
 
             public void onClick(View v) {
-                // Switching to Register screen
-                Intent i = new Intent(getApplicationContext(), MainActivity.class);
-                i.putExtra("acess", false);
-                startActivity(i);
-
-            }
-        });
-
-        // Listening to register new account link
-        registerScreen.setOnClickListener(new View.OnClickListener() {
-
-            public void onClick(View v) {
-                // Switching to Register screen
-                Intent i = new Intent(getApplicationContext(), RegisterActivity.class);
-                startActivity(i);
-
-            }
-        });
-
-        recoveryScreen.setOnClickListener(new View.OnClickListener() {
-
-            public void onClick(View v) {
-                // Switching to Register screen
-                Intent i = new Intent(getApplicationContext(), ForgotActivity.class);
-                startActivity(i);
+                finish();
             }
         });
     }
 }
+
 

@@ -17,7 +17,7 @@
         android:orientation="horizontal"
 
         >
-        <ImageView android:src="@mipmap/logo_small"
+        <ImageView android:src="@mipmap/ic_logo"
             android:id="@+id/loginLogo"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
