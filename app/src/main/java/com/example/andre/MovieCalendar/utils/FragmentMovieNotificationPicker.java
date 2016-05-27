@@ -2,19 +2,20 @@ package com.example.andre.MovieCalendar.utils;
 
 import android.app.DatePickerDialog;
 import android.app.Dialog;
-import android.app.DialogFragment;
+import android.support.v4.app.DialogFragment;
 import android.app.TimePickerDialog;
 import android.os.Bundle;
 import android.text.format.DateFormat;
 import android.widget.DatePicker;
-import android.widget.TimePicker;
+
 import java.util.Calendar;
 
 /**
  * Created by ToZe on 26/05/2016.
  */
-public class MovieNotificationPicker extends DialogFragment implements DatePickerDialog.OnDateSetListener{
+public class FragmentMovieNotificationPicker extends DialogFragment implements DatePickerDialog.OnDateSetListener{
 
+    private ScheduleMovie scheduleMovie;
 
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
@@ -31,7 +32,12 @@ public class MovieNotificationPicker extends DialogFragment implements DatePicke
         timeFragment.setDay(dayOfMonth);
         timeFragment.setMonth(monthOfYear);
         timeFragment.setYear(year);
+        timeFragment.setTimeScheduleMovie(scheduleMovie);
         timeFragment.show(getFragmentManager(),"timePicker");
+    }
+
+    public void setDateScheduleMovie(ScheduleMovie scheduleMovie) {
+        this.scheduleMovie = scheduleMovie;
     }
 
     public static class MovieTimePicker extends DialogFragment implements TimePickerDialog.OnTimeSetListener{
@@ -40,6 +46,7 @@ public class MovieNotificationPicker extends DialogFragment implements DatePicke
         private int day;
         private int month;
         private int year;
+        private ScheduleMovie scheduleMovie;
 
         @Override
         public Dialog onCreateDialog(Bundle savedInstanceState) {
@@ -51,19 +58,29 @@ public class MovieNotificationPicker extends DialogFragment implements DatePicke
 
         @Override
         public void onTimeSet(android.widget.TimePicker view, int hourOfDay, int minute) {
+            Calendar dateChosen= Calendar.getInstance();
+            dateChosen.set(year,month,day);
+            dateChosen.set(Calendar.HOUR_OF_DAY,hourOfDay);
+            dateChosen.set(Calendar.MINUTE,minute);
+            dateChosen.set(Calendar.SECOND,0);
+            scheduleMovie.setMovieNotificationDate(dateChosen);
 
         }
 
-        public void setDay(int day) {
+        protected void setDay(int day) {
             this.day = day;
         }
 
-        public void setMonth(int month) {
+        protected void setMonth(int month) {
             this.month = month;
         }
 
-        public void setYear(int year) {
+        protected void setYear(int year) {
             this.year = year;
+        }
+
+        protected void setTimeScheduleMovie(ScheduleMovie scheduleMovie) {
+            this.scheduleMovie = scheduleMovie;
         }
     }
 }

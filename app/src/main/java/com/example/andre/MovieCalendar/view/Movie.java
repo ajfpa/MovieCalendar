@@ -168,4 +168,8 @@ public class Movie implements Parcelable {
     public void setTheaters(List<String> theaters) {
         this.theaters = theaters;
     }
+
+    public boolean isOnDisplay() {
+        return onDisplay;
+    }
 }

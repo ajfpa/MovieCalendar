@@ -15,6 +15,8 @@ import android.widget.Toast;
 
 import com.example.andre.MovieCalendar.utils.DownloadImageTask;
 import com.example.andre.MovieCalendar.utils.FragmentTheaters;
+import com.example.andre.MovieCalendar.utils.FragmentMovieNotificationPicker;
+import com.example.andre.MovieCalendar.utils.ScheduleMovie;
 import com.example.andre.MovieCalendar.view.Movie;
 
 public class DetailsActivity extends AppCompatActivity {
@@ -26,6 +28,7 @@ public class DetailsActivity extends AppCompatActivity {
     protected Movie movie;
     Toolbar toolBar;
     private boolean favorite;
+    private ScheduleMovie scheduleMovie;
 
     protected static int RESULT_NOT_CHANGED = 3;
 
@@ -42,17 +45,23 @@ public class DetailsActivity extends AppCompatActivity {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
+
         int id = item.getItemId();
         switch (id) {
             case R.id.fav:
                 addFavorite();
+
                 if(favorite){
                     toolBar.getMenu().findItem(R.id.fav).setIcon(R.mipmap.ic_favorite);
-                    DialogFragment newFragment = new FragmentTheaters(this, movie.getTheaters(), listView);
-                    newFragment.show(getSupportFragmentManager(), "theaters");
+                    if(!movie.isOnDisplay()){
+                        DialogFragment dateFragment = new FragmentMovieNotificationPicker();
+                        FragmentMovieNotificationPicker m = (FragmentMovieNotificationPicker) dateFragment;
+                        m.setDateScheduleMovie(scheduleMovie);
+                        dateFragment.show(getSupportFragmentManager(), "timePicker");
+                    }else{
+                    DialogFragment theaterFragment = new FragmentTheaters(this, movie.getTheaters(), listView);
+                        theaterFragment.show(getSupportFragmentManager(), "theaters");
+                    }
                 }else {
                     toolBar.getMenu().findItem(R.id.fav).setIcon(R.mipmap.ic_not_favorite);
                 }
@@ -65,6 +74,9 @@ public class DetailsActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.movie_view);
+
+        scheduleMovie = new ScheduleMovie(this);
+        scheduleMovie.bindService();
 
         toolBar = (Toolbar) findViewById(R.id.toolBar);
         setSupportActionBar(toolBar);
@@ -83,7 +95,7 @@ public class DetailsActivity extends AppCompatActivity {
 
         tvNome.setText(movie.getNome());
         tvData.setText(movie.getData());
-        tvDirector.setText(movie.getDirector());
+        tvDirector.setText("Director: "+ movie.getDirector());
         tvStarring.setText("Starring: " + movie.getStarring());
         tvIntro.setText("Description:\n " + movie.getIntro());
         tvStarring.setMovementMethod(new ScrollingMovementMethod());
@@ -103,6 +115,7 @@ public class DetailsActivity extends AppCompatActivity {
         tvIntro.setText("Description: " + i.getStringExtra("intro"));
         String cover = i.getStringExtra("cover");
         new DownloadImageTask(ivCover).execute(cover);*/
+
         setResult(RESULT_NOT_CHANGED);
     }
 
@@ -125,4 +138,9 @@ public class DetailsActivity extends AppCompatActivity {
 
     }
 
+    @Override
+    protected void onStop() {
+        scheduleMovie.unbindService();
+        super.onStop();
+    }
 }
