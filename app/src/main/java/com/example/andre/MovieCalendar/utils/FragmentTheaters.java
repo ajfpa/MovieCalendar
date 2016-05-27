@@ -8,8 +8,10 @@ import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.v4.app.DialogFragment;
 import android.support.v7.app.AlertDialog;
+import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
@@ -43,30 +45,35 @@ public class FragmentTheaters extends DialogFragment {
         // Get the layout inflater
         LayoutInflater inflater = getActivity().getLayoutInflater();
 
+        final View view = inflater.inflate(R.layout.fragment_theaters, null);
+        builder.setView(view);
+
         // Inflate and set the layout for the dialog
         // Pass null as the parent view because its going in the dialog layout
-        builder.setView(inflater.inflate(R.layout.fragment_theaters, null))
+        builder.setView(view)
                 // Add action buttons
-                .setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+                .setPositiveButton("Cinemas", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int id) {
-                        // sign in the user ...
+                        new TestLocation(a).execute();
                     }
                 })
-                .setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                .setNegativeButton("Back", new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int id) {
 
                     }
                 });
 
-        /*list = (ListView) builder.findViewById(R.id.movie_theaters_list);
+        list = (ListView) view.findViewById(R.id.movie_theaters_list);
+
+        /*list = (ListView) builder.findViewById(R.id.movie_theaters_list);*/
 
         if(list == null){
             Log.d("Erro", "erro");
         }
 
-        adapterList = new TheaterAdapterList(a.getApplicationContext(),setTheaters(theaters));
-        list.setAdapter(adapterList);*/
+        adapterList = new TheaterAdapterList(builder.getContext().getApplicationContext(),setTheaters(theaters));
+        list.setAdapter(adapterList);
 
 
         return builder.create();
@@ -77,8 +84,8 @@ public class FragmentTheaters extends DialogFragment {
 
         for (int i = 0; i < theaters.size(); i++){
             String nome = theaters.get(i).split(" - ")[0];
-            String location = theaters.get(i).split(" - ")[1];
-            list.add(new TheaterItem(i, nome, location));
+            //String location = theaters.get(i).split(" - ")[1];
+            list.add(new TheaterItem(i, nome, "Lisboa"));
         }
 
         return list;

@@ -59,7 +59,7 @@ public class DetailsActivity extends AppCompatActivity {
                         m.setDateScheduleMovie(scheduleMovie);
                         dateFragment.show(getSupportFragmentManager(), "timePicker");
                     }else{
-                    DialogFragment theaterFragment = new FragmentTheaters(this, movie.getTheaters(), listView);
+                        DialogFragment theaterFragment = new FragmentTheaters(this, movie.getTheaters(), listView);
                         theaterFragment.show(getSupportFragmentManager(), "theaters");
                     }
                 }else {
