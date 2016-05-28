@@ -18,6 +18,7 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.GridView;
 import android.widget.ListView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.andre.MovieCalendar.utils.CheckConnection;
@@ -58,7 +59,7 @@ public class MainActivity extends AppCompatActivity {
     protected static int DETAILS = 0;
     private int RESULT_FAVORITE_ADD = 1;
     private int RESULT_FAVORITE_REMOVE = 0;
-    private String lastMovie;
+    private Movie lastMovie;
 
     protected boolean access;
     String[] drawerOptions;
@@ -243,7 +244,7 @@ public class MainActivity extends AppCompatActivity {
 
                     i.putExtra("movie",c);
                     i.putExtra("favorite", ds.isFavorite(c.getNome()));
-                    lastMovie = c.getNome();
+                    lastMovie = c;
                     startActivityForResult(i, DETAILS);
                 }
             });
@@ -266,7 +267,7 @@ public class MainActivity extends AppCompatActivity {
                     }
 
                     i.putExtra("movie",c);
-                    lastMovie = c.getNome();
+                    lastMovie = c;
                     startActivityForResult(i, DETAILS);
                 }
             });
@@ -343,36 +344,27 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        Log.d("Favorite", String.valueOf(resultCode));
         if(resultCode == RESULT_FAVORITE_ADD) {
-            ds.addFavoriteMovieToDB(lastMovie);
-            Movie tempMovie = null;
-            for(Movie favMovie : lcFav){
-                if(Objects.equals(favMovie.getNome(),lastMovie)){
-                    tempMovie=favMovie;
-                    break;
-                }
+            Log.d("FAVORITE_RESULT1", "size of fav list is: "+ lcFav.size() + " size of adapter list is : " + adapterList.getMovieList().size());
+            ds.addFavoriteMovieToDB(lastMovie.getNome());
+            lcFav.add(lastMovie);
+            TextView tv_movie= (TextView)this.findViewById(R.id.tv_Movies);
+            if(Objects.equals(tv_movie.getText(),"Favorites")){
+                lcCurrent.clear();
+                lcCurrent.addAll(lcFav);
             }
-            if(tempMovie!=null){
-                getLcFav().add(tempMovie);
-                getLcCurrent().clear();
-                getLcCurrent().addAll(lcFav);
-            }
+            Log.d("FAVORITE_RESULT2", "size of fav list is: "+ lcFav.size() + " size of adapter list is : " + adapterList.getMovieList().size());
             notifyAdapterOfDataChanged();
         } else if(resultCode == RESULT_FAVORITE_REMOVE) {
-            ds.removeFavorite(lastMovie);
-            Movie tempMovie = null;
-            for(Movie favMovie : lcFav){
-                if(Objects.equals(favMovie.getNome(),lastMovie)){
-                    tempMovie=favMovie;
-                    break;
-                }
+            Log.d("FAVORITE_RESULT3", "size of fav list is: "+ lcFav.size() + " size of adapter list is : " + adapterList.getMovieList().size());
+            ds.removeFavorite(lastMovie.getNome());
+            lcFav.remove(lastMovie);
+            TextView tv_movie= (TextView)this.findViewById(R.id.tv_Movies);
+            if(Objects.equals(tv_movie.getText(),"Favorites")){
+                lcCurrent.clear();
+                lcCurrent.addAll(lcFav);
             }
-            if(tempMovie!=null){
-                getLcFav().remove(tempMovie);
-                getLcCurrent().clear();
-                getLcCurrent().addAll(lcFav);
-            }
+            Log.d("FAVORITE_RESULT4", "size of fav list is: "+ lcFav.size() + " size of adapter list is : " + adapterList.getMovieList().size());
             notifyAdapterOfDataChanged();
         }
     }
@@ -393,8 +385,9 @@ public class MainActivity extends AppCompatActivity {
             adapterGrid.notifyDataSetChanged();
 
         }else{
-            Log.d("FAVORITE_MAIN", "size of fav list is: "+ lcFav.size() + " size of adapter list is : " + adapterGrid.getMovieList().size());
+            Log.d("FAVORITE_MAIN1", "size of fav list is: "+ lcFav.size() + " size of adapter list is : " + adapterList.getMovieList().size());
             adapterList.notifyDataSetChanged();}
+            Log.d("FAVORITE_MAIN2", "size of fav list is: "+ lcFav.size() + " size of adapter list is : " + adapterList.getMovieList().size());
     }
 
     public ArrayList<Movie> getLcFav() {

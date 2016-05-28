@@ -44,7 +44,6 @@ public class DrawerItemListener implements ListView.OnItemClickListener{
         }else if(position==2){
             activity.getLcCurrent().clear();
             activity.getLcCurrent().addAll(activity.getLcUpcoming());
-            //activity.setLcCurrent(activity.getLcUpcoming());
             activity.notifyAdapterOfDataChanged();
             TextView tv_movie= (TextView)activity.findViewById(R.id.tv_Movies);
             tv_movie.setText("Upcoming");
