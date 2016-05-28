@@ -309,8 +309,8 @@ public class MainActivity extends AppCompatActivity {
         if(lcCurrent==null) {
             lcCurrent=new ArrayList<Movie>();
         }
-
-        lcCurrent=lcFav;
+        lcCurrent.clear();
+        lcCurrent.addAll(lcFav);
         adapterList = new MovieAdapterList(MainActivity.this, lcCurrent);
         lvMovies.setAdapter(adapterList);
         adapterGrid = new MovieAdapterGrid(MainActivity.this,lcCurrent);

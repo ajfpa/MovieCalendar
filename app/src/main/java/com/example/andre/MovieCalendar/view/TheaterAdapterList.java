@@ -28,8 +28,8 @@ public class TheaterAdapterList extends ArrayAdapter<TheaterItem> {
         this.theaterList = theaterList;
         this.context = context;
 
-        for(int i = 0; i < theaterList.size(); i++){
-            Log.d("Cinema", theaterList.get(i).getNome() + " - " + theaterList.get(i).getLocation());
+        for(int i = 0; i < this.theaterList.size(); i++){
+            //Log.d("Cinema", this.theaterList.get(i).getNome() + " - " + this.theaterList.get(i).getLocation());
         }
     }
 
@@ -54,7 +54,7 @@ public class TheaterAdapterList extends ArrayAdapter<TheaterItem> {
 
 
         if (convertView == null || convertView.getTag() == null) {
-
+            Log.d("Cinema123", "I'm in");
             holder = new ViewHolder();
             convertView = mInflater.inflate(R.layout.fragment_theater_item, parent, false);
 

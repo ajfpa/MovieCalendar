@@ -2,8 +2,10 @@ package com.example.andre.MovieCalendar.utils;
 
 import android.os.AsyncTask;
 import android.util.Log;
+import android.widget.TextView;
 
 import com.example.andre.MovieCalendar.MainActivity;
+import com.example.andre.MovieCalendar.R;
 import com.example.andre.MovieCalendar.view.Movie;
 
 import org.jsoup.Jsoup;
@@ -13,6 +15,7 @@ import org.jsoup.nodes.Element;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 /**
  * Created by ToZe on 16/05/2016.
@@ -82,6 +85,10 @@ public class CurrentMoviesScraper extends AsyncTask<Void, Void, Void> {
 
         }
         mainActivity.getLcFav().addAll(favoritesList);
+        TextView tv_movie =(TextView) mainActivity.findViewById(R.id.tv_Movies);
+        if(Objects.equals(tv_movie.getText(),"Favorite")){
+            mainActivity.getLcCurrent().addAll(mainActivity.getLcFav());
+        }
         mainActivity.notifyAdapterOfDataChanged();
     }
 }

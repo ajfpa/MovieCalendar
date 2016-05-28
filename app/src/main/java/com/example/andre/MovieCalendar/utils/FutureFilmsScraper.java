@@ -1,8 +1,10 @@
 package com.example.andre.MovieCalendar.utils;
 
 import android.os.AsyncTask;
+import android.widget.TextView;
 
 import com.example.andre.MovieCalendar.MainActivity;
+import com.example.andre.MovieCalendar.R;
 import com.example.andre.MovieCalendar.view.Movie;
 
 import org.jsoup.Jsoup;
@@ -15,6 +17,7 @@ import java.util.Calendar;
 import java.util.GregorianCalendar;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Objects;
 import java.util.TimeZone;
 
 /**
@@ -50,6 +53,10 @@ public class FutureFilmsScraper extends AsyncTask<Void, Void, Void> {
         if(favorites.size()!=0){
             setFavorites();
             mainActivity.getLcFav().addAll(favoritesList);
+            TextView tv_movie =(TextView) mainActivity.findViewById(R.id.tv_Movies);
+            if(Objects.equals(tv_movie.getText(),"Favorites")){
+                mainActivity.getLcCurrent().addAll(mainActivity.getLcFav());
+            }
             mainActivity.notifyAdapterOfDataChanged();
         }
 
