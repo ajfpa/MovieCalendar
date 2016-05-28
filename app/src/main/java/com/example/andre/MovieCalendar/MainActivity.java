@@ -52,7 +52,6 @@ public class MainActivity extends AppCompatActivity {
     private DrawerLayout mDrawerLayout;
     private ArrayList<Movie> lcMovies,lcUpcoming,lcFav,lcCurrent,lcBackup;
     private ArrayList<Theater> lcTheaters;
-    List<String> favorites;
     protected ListView mDrawerList;
     protected int idFav;
 
@@ -290,8 +289,15 @@ public class MainActivity extends AppCompatActivity {
 
         if(lcFav==null){
             lcFav= new ArrayList<Movie>();
-            favorites=ds.getAll();
+
         }
+
+
+        List<String> favorites=ds.getAll();
+
+        if(favorites==null)
+            favorites=new ArrayList<String>();
+
         /*if (new CheckConnection(MainActivity.this).isConnected()) {
             new FavoriteMovieScraper(lcFav,ds.getAll(),this).execute();
         }*/

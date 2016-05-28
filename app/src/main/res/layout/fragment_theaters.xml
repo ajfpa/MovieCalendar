@@ -12,17 +12,12 @@
         android:text="On diplay at:"
         android:id="@+id/textView7" />
 
-    <ScrollView
-        android:layout_width="wrap_content"
-        android:layout_height="307dp"
-        android:id="@+id/scrollView" >
-
         <ListView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             tools:listitem="@layout/fragment_theater_item"
             android:id="@+id/movie_theaters_list" />
-    </ScrollView>
+
 
     
 

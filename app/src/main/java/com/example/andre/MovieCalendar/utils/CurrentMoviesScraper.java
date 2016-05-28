@@ -71,14 +71,11 @@ public class CurrentMoviesScraper extends AsyncTask<Void, Void, Void> {
     protected void onPostExecute(Void aVoid) {
         Log.d("FAVORITE","Starting Favorites");
         mainActivity.notifyAdapterOfDataChanged();
-        if (favorites.size() != 0) {
+        if (favorites!=null) {
             for (String title : favorites) {
                 for (Movie movie : movieList) {
                     if (title.equalsIgnoreCase(movie.getNome())){
-                        Log.d("FAVORITE","Found Favorite : " + movie.getNome() + " size of fav list is: " + favoritesList.size());
                         favoritesList.add(movie);
-                        Log.d("FAVORITE", "size of fav list is: " + favoritesList.size());
-
                     }
                 }
             }

@@ -11,7 +11,8 @@
             android:id="@+id/theater_nome"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textSize="12pt"/>
+            android:textSize="12pt"
+            android:textColor="#000000"/>
 
         <TextView
             android:layout_width="wrap_content"
@@ -20,7 +21,8 @@
             android:id="@+id/theater_location"
             android:layout_below="@+id/theater_nome"
             android:layout_alignParentStart="true"
-            android:layout_alignParentEnd="true" />
+            android:layout_alignParentEnd="true"
+            android:textColor="#000000"/>
 
     </RelativeLayout>
 

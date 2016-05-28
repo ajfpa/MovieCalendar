@@ -54,7 +54,6 @@ public class TheaterAdapterList extends ArrayAdapter<TheaterItem> {
 
 
         if (convertView == null || convertView.getTag() == null) {
-            Log.d("Cinema123", "I'm in");
             holder = new ViewHolder();
             convertView = mInflater.inflate(R.layout.fragment_theater_item, parent, false);
 
