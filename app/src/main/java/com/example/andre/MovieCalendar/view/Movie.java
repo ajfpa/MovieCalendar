@@ -18,7 +18,7 @@ public class Movie implements Parcelable {
     protected Bitmap imageCover;
     protected List<String> theaters;
     protected boolean onDisplay;
-    protected double rating;
+    protected double rating=0.0;
 
 
     public Movie(long id, String nome, String data, String intro, String cover, String director, String starring, int favorite) {

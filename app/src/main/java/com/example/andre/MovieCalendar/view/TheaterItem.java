@@ -4,7 +4,7 @@ import android.graphics.Bitmap;
 import android.os.Parcel;
 import android.os.Parcelable;
 
-import com.example.andre.MovieCalendar.utils.Theater;
+import com.example.andre.MovieCalendar.view.Theater;
 
 import java.util.ArrayList;
 import java.util.List;

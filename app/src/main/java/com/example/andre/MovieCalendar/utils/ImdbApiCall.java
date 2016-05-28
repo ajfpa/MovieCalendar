@@ -25,7 +25,7 @@ public class ImdbApiCall extends AsyncTask<Void,Void,Void> {
     private String key;
     private String omdbUrl="http://www.omdbapi.com/?i=";
     private String apiOptions="&plot=short&r=json";
-    private double rating;
+    private double rating=0.0;
     private DetailsActivity detailsActivity;
     public ImdbApiCall(DetailsActivity detailsActivity,String key) {
         this.detailsActivity=detailsActivity;
@@ -67,7 +67,9 @@ public class ImdbApiCall extends AsyncTask<Void,Void,Void> {
 
     @Override
     protected void onPostExecute(Void aVoid) {
+        if(rating!=0.0){
         detailsActivity.getMovie().setRating(rating/2);
         detailsActivity.setRating(rating/2);
+        }
     }
 }

@@ -2,6 +2,8 @@ package com.example.andre.MovieCalendar.utils;
 
 import android.os.AsyncTask;
 
+import com.example.andre.MovieCalendar.view.Theater;
+
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.select.Elements;

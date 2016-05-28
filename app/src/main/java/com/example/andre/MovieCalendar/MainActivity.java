@@ -22,7 +22,7 @@ import android.widget.Toast;
 
 import com.example.andre.MovieCalendar.utils.CheckConnection;
 import com.example.andre.MovieCalendar.utils.FutureFilmsScraper;
-import com.example.andre.MovieCalendar.utils.Theater;
+import com.example.andre.MovieCalendar.view.Theater;
 import com.example.andre.MovieCalendar.utils.TheatersScraper;
 import com.example.andre.MovieCalendar.view.MovieAdapterGrid;
 import com.example.andre.MovieCalendar.view.MovieAdapterList;
@@ -35,6 +35,7 @@ import com.example.andre.MovieCalendar.view.Movie;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 import java.util.concurrent.ExecutionException;
 
 public class MainActivity extends AppCompatActivity {
@@ -51,6 +52,7 @@ public class MainActivity extends AppCompatActivity {
     private DrawerLayout mDrawerLayout;
     private ArrayList<Movie> lcMovies,lcUpcoming,lcFav,lcCurrent,lcBackup;
     private ArrayList<Theater> lcTheaters;
+    List<String> favorites;
     protected ListView mDrawerList;
     protected int idFav;
 
@@ -152,7 +154,6 @@ public class MainActivity extends AppCompatActivity {
     @Override
     public void onConfigurationChanged(Configuration newConfig) {
         super.onConfigurationChanged(newConfig);
-        // Pass any configuration change to the drawer toggls
         mDrawerToggle.onConfigurationChanged(newConfig);
     }
 
@@ -164,7 +165,18 @@ public class MainActivity extends AppCompatActivity {
     }
 
     @Override
+    protected void onRestoreInstanceState(Bundle savedInstanceState) {
+        super.onRestoreInstanceState(savedInstanceState);
+        lcCurrent=savedInstanceState.getParcelableArrayList("listCurrent");
+        lcFav=savedInstanceState.getParcelableArrayList("listFav");
+        lcMovies=savedInstanceState.getParcelableArrayList("listMovies");
+        lcUpcoming=savedInstanceState.getParcelableArrayList("listUpcoming");
+        lcTheaters=savedInstanceState.getParcelableArrayList("listTheaters");
+    }
+
+    @Override
     protected void onCreate(Bundle savedInstanceState) {
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
@@ -184,28 +196,23 @@ public class MainActivity extends AppCompatActivity {
 
 
         mDrawerToggle = new ActionBarDrawerToggle(
-                this,                  /* host Activity */
-                mDrawerLayout,         /* DrawerLayout object */
-                toolBar,  /* nav drawer image to replace 'Up' caret */
-                R.string.drawer_open,  /* "open drawer" description for accessibility */
-                R.string.drawer_close  /* "close drawer" description for accessibility */
+                this,
+                mDrawerLayout,
+                toolBar,
+                R.string.drawer_open,
+                R.string.drawer_close
         ) {
             public void onDrawerClosed(View view) {
 
-                invalidateOptionsMenu(); // creates call to onPrepareOptionsMenu()
+                invalidateOptionsMenu();
             }
 
             public void onDrawerOpened(View drawerView) {
 
-                invalidateOptionsMenu(); // creates call to onPrepareOptionsMenu()
+                invalidateOptionsMenu();
             }
         };
         mDrawerLayout.addDrawerListener(mDrawerToggle);
-
-
-        if(savedInstanceState !=null){
-            lcCurrent =savedInstanceState.getParcelable("listM");
-        }
 
         ds = new MovieDatasource(this);
         ds.open();
@@ -281,9 +288,10 @@ public class MainActivity extends AppCompatActivity {
 
     public void addToListView(){
 
-
-        lcFav= new ArrayList<Movie>();
-        List<String> favorites=ds.getAll();
+        if(lcFav==null){
+            lcFav= new ArrayList<Movie>();
+            favorites=ds.getAll();
+        }
         /*if (new CheckConnection(MainActivity.this).isConnected()) {
             new FavoriteMovieScraper(lcFav,ds.getAll(),this).execute();
         }*/
@@ -307,10 +315,10 @@ public class MainActivity extends AppCompatActivity {
         }
 
         if(lcCurrent==null) {
-            lcCurrent=new ArrayList<Movie>();
+            lcCurrent = new ArrayList<Movie>();
+            lcCurrent.clear();
+            lcCurrent.addAll(lcFav);
         }
-        lcCurrent.clear();
-        lcCurrent.addAll(lcFav);
         adapterList = new MovieAdapterList(MainActivity.this, lcCurrent);
         lvMovies.setAdapter(adapterList);
         adapterGrid = new MovieAdapterGrid(MainActivity.this,lcCurrent);
@@ -332,14 +340,45 @@ public class MainActivity extends AppCompatActivity {
         Log.d("Favorite", String.valueOf(resultCode));
         if(resultCode == RESULT_FAVORITE_ADD) {
             ds.addFavoriteMovieToDB(lastMovie);
+            Movie tempMovie = null;
+            for(Movie favMovie : lcFav){
+                if(Objects.equals(favMovie.getNome(),lastMovie)){
+                    tempMovie=favMovie;
+                    break;
+                }
+            }
+            if(tempMovie!=null){
+                getLcFav().add(tempMovie);
+                getLcCurrent().clear();
+                getLcCurrent().addAll(lcFav);
+            }
+            notifyAdapterOfDataChanged();
         } else if(resultCode == RESULT_FAVORITE_REMOVE) {
             ds.removeFavorite(lastMovie);
+            Movie tempMovie = null;
+            for(Movie favMovie : lcFav){
+                if(Objects.equals(favMovie.getNome(),lastMovie)){
+                    tempMovie=favMovie;
+                    break;
+                }
+            }
+            if(tempMovie!=null){
+                getLcFav().remove(tempMovie);
+                getLcCurrent().clear();
+                getLcCurrent().addAll(lcFav);
+            }
+            notifyAdapterOfDataChanged();
         }
     }
 
     protected void onSaveInstanceState(Bundle bundle) {
+        Log.d("PAUSE", "I'm Pausing");
         super.onSaveInstanceState(bundle);
-        bundle.putParcelableArrayList("listM", lcCurrent);
+        bundle.putParcelableArrayList("listCurrent", lcCurrent);
+        bundle.putParcelableArrayList("listFav", lcFav);
+        bundle.putParcelableArrayList("listMovies", lcMovies);
+        bundle.putParcelableArrayList("listUpcoming", lcUpcoming);
+        bundle.putParcelableArrayList("listTheaters",lcTheaters);
     }
 
     public void notifyAdapterOfDataChanged(){

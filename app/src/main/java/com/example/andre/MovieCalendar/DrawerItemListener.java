@@ -2,6 +2,7 @@ package com.example.andre.MovieCalendar;
 
 import android.content.Intent;
 import android.support.v4.widget.DrawerLayout;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
@@ -26,13 +27,15 @@ public class DrawerItemListener implements ListView.OnItemClickListener{
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
         if(position==0) {
+            Log.d("SIZEABLE1", "The fav list is : " + activity.getLcFav().size() + " The current list size is: " + activity.getLcCurrent().size());
             activity.getLcCurrent().clear();
             activity.getLcCurrent().addAll(activity.getLcFav());
-            //activity.setLcCurrent(activity.getLcFav());
+            Log.d("SIZEABLE2", "The fav list is : " + activity.getLcFav().size() + " The current list size is: " + activity.getLcCurrent().size());
             activity.notifyAdapterOfDataChanged();
             TextView tv_movie= (TextView)activity.findViewById(R.id.tv_Movies);
             tv_movie.setText("Favorites");
         }else if (position==1){
+            activity.getLcCurrent().clear();
             activity.getLcCurrent().addAll(activity.getLcMovies());
             activity.notifyAdapterOfDataChanged();
             //activity.setLcCurrent(activity.getLcMovies());

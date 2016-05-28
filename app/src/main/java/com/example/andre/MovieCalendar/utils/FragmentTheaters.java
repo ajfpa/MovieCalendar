@@ -45,7 +45,7 @@ public class FragmentTheaters extends DialogFragment {
         // Get the layout inflater
         LayoutInflater inflater = getActivity().getLayoutInflater();
 
-        final View view = inflater.inflate(R.layout.fragment_theaters, null);
+        View view = inflater.inflate(R.layout.fragment_theaters, null);
         builder.setView(view);
 
         // Inflate and set the layout for the dialog
