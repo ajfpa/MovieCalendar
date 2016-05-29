@@ -49,9 +49,6 @@ public class DrawerItemListener implements ListView.OnItemClickListener{
             tv_movie.setText("Upcoming");
         }else if (position==3){
             new TestLocation(activity).execute();
-        }else if(position==4){
-            Intent i = new Intent(activity.getApplicationContext(), SettingsActivity.class);
-            activity.startActivity(i);
         }else if (position==5){
             Intent i = new Intent(activity.getApplicationContext(), AboutActivity.class);
             activity.startActivity(i);

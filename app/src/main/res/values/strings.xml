@@ -22,10 +22,9 @@
     <string name="drawer_close">Close navigation drawer</string>
     <string-array name="side_bar_option">
         <item>Favorites</item>
-        <item>Em exibição</item>
-        <item>Estreias</item>
+        <item>Now Playing</item>
+        <item>Opening Soon</item>
         <item>Cinemas</item>
-        <item>Setting</item>
         <item>About</item>
     </string-array>
 </resources>

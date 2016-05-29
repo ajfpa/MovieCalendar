@@ -9,7 +9,9 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerInParent="true"
-        android:src="@drawable/logo" />
+        android:src="@mipmap/ic_logo"
+        android:minHeight="200dp"
+        android:minWidth="200dp" />
 
 
 
