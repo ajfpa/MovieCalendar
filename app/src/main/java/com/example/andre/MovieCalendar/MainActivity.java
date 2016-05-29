@@ -180,6 +180,9 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        Intent i = getIntent();
+        access = i.getBooleanExtra("access", false);
+
         toolBar = (Toolbar) findViewById(R.id.toolBar);
         setSupportActionBar(toolBar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
@@ -189,7 +192,7 @@ public class MainActivity extends AppCompatActivity {
         mDrawerList = (ListView) findViewById(R.id.left_drawer);
 
         mDrawerList.setAdapter(new ArrayAdapter<>(getApplicationContext(),R.layout.drawer_list_item,drawerOptions));
-        mDrawerList.setOnItemClickListener(new DrawerItemListener(this,mDrawerLayout));
+        mDrawerList.setOnItemClickListener(new DrawerItemListener(this, access, mDrawerLayout));
 
         lvMovies = (ListView) findViewById(R.id.lvMovies);
         grdMovies = (GridView) findViewById(R.id.grdMovies);
@@ -218,10 +221,6 @@ public class MainActivity extends AppCompatActivity {
         ds.open();
 
         addToListView();
-
-        Intent i = getIntent();
-
-        access = i.getBooleanExtra("access", false);
 
         if(access) {
             lvMovies.setOnItemClickListener(new AdapterView.OnItemClickListener() {
