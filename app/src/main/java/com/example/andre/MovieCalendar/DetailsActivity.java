@@ -29,8 +29,9 @@ public class DetailsActivity extends AppCompatActivity {
     protected ListView listView;
     protected long id;
     protected Movie movie;
-    Toolbar toolBar;
+    protected Toolbar toolBar;
     private boolean favorite;
+    private boolean alreadyFavorite;
     private ScheduleMovie scheduleMovie;
 
     protected static int RESULT_NOT_CHANGED = 3;
@@ -102,6 +103,7 @@ public class DetailsActivity extends AppCompatActivity {
         Intent i = getIntent();
         movie = i.getParcelableExtra("movie");
         favorite = i.getBooleanExtra("favorite", false);
+        alreadyFavorite=favorite;
         Log.d("IMDB_KEY","The key is: " + movie.getImdbKey());
         new ImdbApiCall(this,movie.getImdbKey()).execute();
 
@@ -135,9 +137,13 @@ public class DetailsActivity extends AppCompatActivity {
     public void addFavorite() {
         if(!favorite){
             favorite = true;
+            if(!alreadyFavorite){
             Intent i = new Intent();
             i.putExtra("recordID", movie.getNome());
             setResult(1, i);
+            }else{
+                setResult(2);
+            }
             Toast.makeText(getApplicationContext(), "Movie added to favorites", Toast.LENGTH_SHORT).show();
         }
 
@@ -172,6 +178,7 @@ public class DetailsActivity extends AppCompatActivity {
     public Movie getMovie() {
         return movie;
     }
+
     public void setRating(double rating){
         RatingBar ratingBar = (RatingBar) findViewById(R.id.movie_ratingBar);
         ratingBar.setRating(new Float(rating));

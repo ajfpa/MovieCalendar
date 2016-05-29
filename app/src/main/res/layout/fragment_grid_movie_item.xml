@@ -6,6 +6,8 @@
     <ImageView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/iv_grid_MovieCover"/>
+        android:id="@+id/iv_grid_MovieCover"
+        android:scaleType="fitXY"
+        android:minHeight="100dp"/>
 
 </LinearLayout>

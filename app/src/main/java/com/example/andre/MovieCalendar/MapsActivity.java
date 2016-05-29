@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -37,16 +38,20 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
     public GoogleMap g_map;
     public Map<Marker, Integer> hmap;
     public static final int RANGE = 50000;
-
+    protected Toolbar toolBar;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_maps);
 
+        toolBar = (Toolbar) findViewById(R.id.toolBar);
+        setSupportActionBar(toolBar);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setDisplayShowHomeEnabled(true);
+
         Intent i = getIntent();
         latitude = i.getDoubleExtra("latitude", 0);
         longitude = i.getDoubleExtra("longitude", 0);
-
 
         MapFragment mapFragment = (MapFragment)
                 getFragmentManager().findFragmentById(R.id.mapView);
@@ -171,16 +176,14 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
     }
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
+
         int id = item.getItemId();
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            Intent i = new Intent(MapsActivity.this, SettingsActivity.class);
-            startActivity(i);
-            return true;
+        switch (id){
+            case android.R.id.home:
+                onBackPressed();
+                break;
         }
+
         return super.onOptionsItemSelected(item);
     }
 }

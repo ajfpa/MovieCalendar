@@ -1,13 +1,28 @@
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
-    android:layout_height="match_parent" android:paddingLeft="0dp"
-    android:paddingRight="0dp"
-    android:paddingTop="0dp"
-    android:paddingBottom="0dp"
-    tools:context=".MapsActivity">
-    <fragment
-        android:id="@+id/mapView"
-        android:name="com.google.android.gms.maps.MapFragment"
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_height="match_parent"
+    android:layout_width="match_parent"
+    android:orientation="vertical">
+    <android.support.v7.widget.Toolbar
+        android:layout_height="wrap_content"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"/>
-</RelativeLayout>
+        android:minHeight="?attr/actionBarSize"
+        android:id="@+id/toolBar"
+        android:background="@color/colorPrimary"
+        ></android.support.v7.widget.Toolbar>
+    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
+        android:layout_height="match_parent" android:paddingLeft="0dp"
+        android:paddingRight="0dp"
+        android:paddingTop="0dp"
+        android:paddingBottom="0dp"
+        tools:context=".MapsActivity">
+
+        <fragment
+            android:id="@+id/mapView"
+            android:name="com.google.android.gms.maps.MapFragment"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"/>
+    </RelativeLayout>
+</LinearLayout>
+
