@@ -50,21 +50,21 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textAppearance="?android:attr/textAppearanceLarge"
-                android:text="MOVIE CALENDAR v1.0"
+                android:text="@string/app_version"
                 android:id="@+id/title"
                 android:layout_gravity="center_horizontal" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed fringilla purus sem, at pretium ex aliquet sed. Aliquam scelerisque euismod metus, vitae porta metus rhoncus eu. Donec pharetra, magna eu feugiat tempor, neque massa porttitor nunc, sodales aliquet tellus dui vitae purus. In hac habitasse platea dictumst."
+                android:text="@string/about_description"
                 android:id="@+id/textView8"
                 android:layout_marginTop="20dp" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Developed by:"
+                android:text="@string/developed_by"
                 android:id="@+id/textView9"
                 android:layout_marginTop="20dp" />
 
@@ -72,7 +72,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textAppearance="?android:attr/textAppearanceMedium"
-                android:text="André Glória 60176 METI"
+                android:text="@string/andre_gloria"
                 android:id="@+id/A60176"
                 android:layout_gravity="center_horizontal"
                 android:layout_marginTop="20dp" />
@@ -81,7 +81,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textAppearance="?android:attr/textAppearanceMedium"
-                android:text="António Pereira 60382 METI"
+                android:text="@string/antonio_pereira"
                 android:id="@+id/A62382"
                 android:layout_gravity="center_horizontal"
                 android:layout_marginTop="10dp" />

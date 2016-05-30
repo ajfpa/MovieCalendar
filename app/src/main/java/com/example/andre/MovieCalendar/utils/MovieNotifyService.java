@@ -1,6 +1,5 @@
 package com.example.andre.MovieCalendar.utils;
 
-import android.app.Notification;
 import android.app.NotificationManager;
 import android.app.Service;
 import android.content.Intent;
@@ -8,7 +7,6 @@ import android.os.Binder;
 import android.os.IBinder;
 import android.support.annotation.Nullable;
 import android.support.v4.app.NotificationCompat;
-import android.util.Log;
 
 import com.example.andre.MovieCalendar.R;
 
@@ -52,7 +50,7 @@ public class MovieNotifyService extends Service{
     private void showNotification(){
 
         String title = movieIntent.getStringExtra("MovieName");
-        int movieIcon = R.drawable.ic_movie_black_24dp;
+        int movieIcon = R.mipmap.ic_movie_black_24dp;
         String message= title+" has been released in theaters";
         long time = System.currentTimeMillis();
         NotificationCompat.Builder movieNotification =

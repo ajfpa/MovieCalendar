@@ -44,7 +44,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textAppearance="?android:attr/textAppearanceMedium"
-                    android:text="Username"
+                    android:text="@string/username"
                     android:id="@+id/textView" />
 
                 <EditText android:id="@+id/etUsername"
@@ -71,13 +71,13 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textAppearance="?android:attr/textAppearanceMedium"
-                    android:text="First Name"
+                    android:text="@string/first_name"
                     android:id="@+id/textView6" />
 
                 <EditText android:id="@+id/etFirstName"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="First Name"
+                    android:hint="@string/first_name"
                     android:inputType="text"
                     android:maxLines="1"
                     android:singleLine="true"
@@ -96,13 +96,13 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textAppearance="?android:attr/textAppearanceMedium"
-                    android:text="Last Name"
+                    android:text="@string/last_name"
                     android:id="@+id/textView5" />
 
                 <EditText android:id="@+id/etLastName"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="Last Name"
+                    android:hint="@string/last_name"
                     android:inputType="text"
                     android:maxLines="1"
                     android:singleLine="true"
@@ -121,7 +121,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textAppearance="?android:attr/textAppearanceMedium"
-                    android:text="Email"
+                    android:text="@string/email"
                     android:id="@+id/textView4" />
 
                 <AutoCompleteTextView android:id="@+id/etEmail"
@@ -148,7 +148,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textAppearance="?android:attr/textAppearanceMedium"
-                    android:text="Password"
+                    android:text="@string/password"
                     android:id="@+id/textView3" />
 
                 <EditText android:id="@+id/etPassword" android:layout_width="match_parent"
@@ -172,7 +172,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textAppearance="?android:attr/textAppearanceMedium"
-                    android:text="Confirm Password"
+                    android:text="@string/confirm_password"
                     android:id="@+id/textView2" />
 
                 <EditText android:id="@+id/etConfirmPassword"

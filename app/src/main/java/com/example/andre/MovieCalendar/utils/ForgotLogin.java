@@ -5,6 +5,8 @@ import android.app.ProgressDialog;
 import android.os.AsyncTask;
 import android.widget.Toast;
 
+import com.example.andre.MovieCalendar.R;
+
 import java.io.BufferedReader;
 import java.io.DataOutputStream;
 import java.io.IOException;
@@ -38,7 +40,7 @@ public class ForgotLogin extends AsyncTask<String, String, String> {
         super.onPreExecute();
         progressDialog =null;
         progressDialog = new ProgressDialog(a);
-        progressDialog.setMessage("Sending request....");
+        progressDialog.setMessage(a.getResources().getString(R.string.login_loading));
         progressDialog.setIndeterminate(false);
         progressDialog.setCancelable(false);
         progressDialog.show();
@@ -46,7 +48,6 @@ public class ForgotLogin extends AsyncTask<String, String, String> {
 
     @Override
     protected String doInBackground(String... args) {
-        // TODO Auto-generated method stub
         try {
 
             URL url = new URL("http://andregloria.com/daam/forgot.php");

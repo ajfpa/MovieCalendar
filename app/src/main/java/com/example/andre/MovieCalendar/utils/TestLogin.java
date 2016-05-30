@@ -6,7 +6,9 @@ package com.example.andre.MovieCalendar.utils;
 
 import android.app.Activity;
 import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.widget.Toast;
 
@@ -53,9 +55,9 @@ public class TestLogin extends AsyncTask<String, String, String> {
 
     @Override
     protected String doInBackground(String... args) {
-        // TODO Auto-generated method stub
-        // Check for success tag
+
         int success;
+        String commit_password = password;
         password = Utils.MD5(password);
 
         try {
@@ -86,6 +88,11 @@ public class TestLogin extends AsyncTask<String, String, String> {
             System.out.println(result);
 
             if (result.equals("true")) {
+                SharedPreferences sharedPrefs = a.getSharedPreferences("login", Context.MODE_PRIVATE);
+                SharedPreferences.Editor editor = sharedPrefs.edit();
+                editor.putString("username",email);
+                editor.putString("password",commit_password);
+                editor.commit();
                 Intent i = new Intent(a, MainActivity.class);
                 i.putExtra("access", true);
                 a.finish();

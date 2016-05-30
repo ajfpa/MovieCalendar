@@ -52,7 +52,7 @@ public class CurrentMoviesScraper extends AsyncTask<Void, Void, Void> {
             htmlContentPrimary.children().last().remove();
             //Log.e("OUTPUT","We have " +htmlContentPrimary.children().size() + " movies on show.");
             for (int count=0; count < htmlContentPrimary.children().size();count++) {
-                String title = htmlContentPrimary.child(count).select("div.filmeListaInfo > h2 > a > span").text();
+                String title = htmlContentPrimary.child(count).select("div.filmeListaInfo > h2 > a > span").first().ownText();
                 String coverUrl = htmlContentPrimary.child(count).select("div.filmeListaPoster > a > img").attr("abs:src");
                 String redirectUrl = htmlContentPrimary.child(count).select("div.filmeListaPoster > a").attr("abs:href");
                 //Log.d("OUTPUT", title+ "  "+redirectUrl );

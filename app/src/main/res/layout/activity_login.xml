@@ -61,7 +61,7 @@
 
             <AutoCompleteTextView android:id="@+id/email" android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="Username"
+                android:hint="@string/username"
                 android:inputType="textEmailAddress"
                 android:maxLines="1"
                 android:singleLine="true"
@@ -81,7 +81,8 @@
             <Button android:id="@+id/login"
                 style="?android:textAppearanceSmall"
                 android:layout_width="match_parent" android:layout_height="wrap_content"
-                android:layout_marginTop="6dp" android:text="@string/login"
+                android:layout_marginTop="6dp"
+                android:text="@string/login"
                 android:textStyle="bold"
                 android:minHeight="45dp"
                 android:textColor="#ffffffff"

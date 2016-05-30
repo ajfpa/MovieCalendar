@@ -13,7 +13,7 @@ import java.util.List;
 public class Movie implements Parcelable {
 
     protected long id;
-    protected String nome, data, intro, cover, director, starring, redirectUrl, imdbKey;
+    protected String nome, data, intro, cover, director, starring, redirectUrl,imdbUrl ,imdbKey;
     protected int favorite=0;
     protected Bitmap imageCover;
     protected List<String> theaters;
@@ -50,6 +50,7 @@ public class Movie implements Parcelable {
         director = in.readString();
         starring = in.readString();
         redirectUrl = in.readString();
+        imdbUrl = in.readString();
         imdbKey = in.readString();
         favorite = in.readInt();
         imageCover = in.readParcelable(Bitmap.class.getClassLoader());
@@ -68,6 +69,7 @@ public class Movie implements Parcelable {
         dest.writeString(director);
         dest.writeString(starring);
         dest.writeString(redirectUrl);
+        dest.writeString(imdbUrl);
         dest.writeString(imdbKey);
         dest.writeInt(favorite);
         dest.writeParcelable(imageCover, flags);
@@ -193,5 +195,13 @@ public class Movie implements Parcelable {
 
     public double getRating() {
         return rating;
+    }
+
+    public void setImdbUrl(String imdbUrl) {
+        this.imdbUrl = imdbUrl;
+    }
+
+    public String getImdbUrl() {
+        return imdbUrl;
     }
 }

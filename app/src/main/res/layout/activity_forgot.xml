@@ -34,7 +34,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceLarge"
-            android:text="FORGOT YOUR PASSWORD?"
+            android:text="@string/forgot_password"
             android:id="@+id/title"
             android:layout_gravity="center_horizontal" />
 
@@ -42,7 +42,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceMedium"
-            android:text="Please insert your email:"
+            android:text="@string/insert_email"
             android:id="@+id/textView8"
             android:layout_marginTop="10dp" />
 
@@ -65,7 +65,8 @@
         <Button android:id="@+id/newPassword"
             style="?android:textAppearanceSmall"
             android:layout_width="match_parent" android:layout_height="wrap_content"
-            android:layout_marginTop="16dp" android:text="Reset Password"
+            android:layout_marginTop="16dp"
+            android:text="@string/reset_password"
             android:textStyle="bold"
             android:minHeight="45dp"
             android:textColor="#ffffffff"
@@ -74,7 +75,8 @@
         <Button android:id="@+id/backLogin"
             style="?android:textAppearanceSmall"
             android:layout_width="match_parent" android:layout_height="wrap_content"
-            android:layout_marginTop="16dp" android:text="Login"
+            android:layout_marginTop="16dp"
+            android:text="@string/login"
             android:textStyle="bold"
             android:minHeight="45dp"
             android:textColor="#ffffffff"

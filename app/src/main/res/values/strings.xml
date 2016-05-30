@@ -20,11 +20,42 @@
     <string name="noInternetConnection">No Internet Connection</string>
     <string name="drawer_open">Open navigation drawer</string>
     <string name="drawer_close">Close navigation drawer</string>
+    <string name="facebook_app_id">1028844703830774</string>
+
+    <string name="login_loading">Sending request....</string>
+    <string name="location_loading">Sending request....</string>
+    <string name="cinemas_loading">Getting Theaters from server...</string>
+    <string name="director">Director: </string>
+    <string name="starring">Starring: </string>
+    <string name="description">Description:\n</string>
+    <string name="removed_favorites">Movie removed from favorites</string>
+    <string name="added_favorites">Movie added to favorites</string>
+    <string name="no_location">No Location access!</string>
+    <string name="logged_in_see_cinemas">Need to be logged in to see Cinemas!</string>
+    <string name="logged_in_see_movie_details">Need to be logged in to see Movie Info</string>
+    <string name="logged_out">You have been logged out!</string>
+    <string name="title_favorites">Favorites</string>
+    <string name="title_upcoming">Upcoming</string>
+    <string name="title_onCinema">On Cinema</string>
+    <string name="enter_all_fields">Enter all fields!</string>
+    <string name="no_connection">No Internet Connection</string>
+    <string name="about_description">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed fringilla purus sem, at pretium ex aliquet sed. Aliquam scelerisque euismod metus, vitae porta metus rhoncus eu. Donec pharetra, magna eu feugiat tempor, neque massa porttitor nunc, sodales aliquet tellus dui vitae purus. In hac habitasse platea dictumst.</string>
+    <string name="developed_by">Developed by:</string>
+    <string name="andre_gloria">André Glória 60176 METI</string>
+    <string name="antonio_pereira">António Pereira 60382 METI</string>
+    <string name="app_version">MOVIE CALENDAR v1.0</string>
+    <string name="forgot_password">FORGOT YOUR PASSWORD?</string>
+    <string name="insert_email">Please insert your email:</string>
+    <string name="reset_password">Reset Password</string>
+    <string name="first_name">First Name</string>
+    <string name="last_name">Last Name</string>
+    <string name="on_diplay_at">On diplay at:</string>
     <string-array name="side_bar_option">
         <item>Favorites</item>
         <item>Now Playing</item>
         <item>Opening Soon</item>
         <item>Cinemas</item>
         <item>About</item>
+        <item>Logout</item>
     </string-array>
 </resources>

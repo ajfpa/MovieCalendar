@@ -1,18 +1,14 @@
 package com.example.andre.MovieCalendar;
 
 import android.app.Activity;
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
-import android.widget.EditText;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.andre.MovieCalendar.utils.CheckConnection;
 import com.example.andre.MovieCalendar.utils.ForgotLogin;
-import com.example.andre.MovieCalendar.utils.TestLogin;
 
 /**
  * Created by ANDRE on 27/05/16.
@@ -27,7 +23,6 @@ public class ForgotActivity extends Activity {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        // setting default screen to login.xml
         setContentView(R.layout.activity_forgot);
         email = (AutoCompleteTextView) findViewById(R.id.email);
         forgotButton = (Button) findViewById(R.id.newPassword);
@@ -43,7 +38,7 @@ public class ForgotActivity extends Activity {
 
                     if(userText.equals("")){
                         if (toast == null || toast.getView().getWindowVisibility() != View.VISIBLE) {
-                            toast = Toast.makeText(getApplicationContext(), "Enter all fields!", Toast.LENGTH_LONG);
+                            toast = Toast.makeText(getApplicationContext(),getResources().getString(R.string.enter_all_fields), Toast.LENGTH_LONG);
                             toast.show();
                         }
                     }else {
@@ -51,7 +46,7 @@ public class ForgotActivity extends Activity {
                     }
                 }else{
                     if (toast == null || toast.getView().getWindowVisibility() != View.VISIBLE) {
-                        toast = Toast.makeText(getApplicationContext(), "No Internet Connection", Toast.LENGTH_LONG);
+                        toast = Toast.makeText(getApplicationContext(), getResources().getString(R.string.no_connection), Toast.LENGTH_LONG);
                         toast.show();
                     }
 

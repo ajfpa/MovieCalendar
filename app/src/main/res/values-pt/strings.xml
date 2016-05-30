@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Movie Calendar</string>
+    <string name="RetrievePassword">Recuperar Password</string>
+    <string name="account_successfully_created">Conta criada com sucesso</string>
+    <string name="action_settings">Definições</string>
+    <string name="added_favorites">Filme adicionado aos favoritos</string>
+    <string name="agree_terms_and_conditions">Aceitar Termos e Condições</string>
+    <string name="cinemas_loading">A obter cinemas a partir do servidor...</string>
+    <string name="confirm_password">Confirmar password</string>
+    <string name="description">Descrição:\n</string>
+    <string name="developed_by">Desenvolvido por:</string>
+    <string name="director">Diretor: </string>
+    <string name="drawer_close">Fechar drawer de navegação</string>
+    <string name="drawer_open">Abrir drawer de navegação</string>
+    <string name="email">Email</string>
+    <string name="enter_all_fields">Insira dados em todos os campos</string>
+    <string name="first_name">Primeiro Nome</string>
+    <string name="forgotPassword">Esqueceu-se da sua password?</string>
+    <string name="goBackLogin">Login</string>
+    <string name="insert_email">Por favor insira o seu email.</string>
+    <string name="invalid_email">Email inválido</string>
+    <string name="last_name">Último Nome</string>
+    <string name="location_loading">A enviar pedido</string>
+    <string name="login_loading">A enviar pedido</string>
+    <string name="logged_in_see_cinemas">É necessário ter o login feito para ver os cinemas</string>
+    <string name="logged_in_see_movie_details">É necessário ter o login feito para ver informação detalhada sobre o filme</string>
+    <string name="logged_out">Foste desconectado</string>
+    <string name="login">Login</string>
+    <string name="noInternetConnection">Sem ligação à internet</string>
+    <string name="no_location">Sem acesso à localizacão</string>
+    <string name="no_connection">Sem ligação à internet</string>
+    <string name="on_diplay_at">Em exibição em:</string>
+    <string name="password">Password</string>
+    <string name="password_does_not_match">A password não corresponde</string>
+    <string name="please_insert_all_fields">Insira dados em todos os campos</string>
+    <string name="register_new_account">Registar nova conta</string>
+    <string name="removed_favorites">Filme retirado dos favoritos</string>
+    <string name="reset_password">Repor Password</string>
+    <string name="signUp">Registar</string>
+    <string name="starring">Com:</string>
+    <string name="title_activity_forgot_login">Esqueceu-se da sua password?</string>
+    <string name="title_favorites">Favoritos</string>
+    <string name="title_onCinema">Em exibição</string>
+    <string name="title_upcoming">Brevemente</string>
+    <string name="username">Nome de utilizador</string>
+</resources>

@@ -2,6 +2,7 @@ package com.example.andre.MovieCalendar;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.location.LocationManager;
 import android.support.v4.widget.DrawerLayout;
 import android.util.Log;
@@ -31,26 +32,23 @@ public class DrawerItemListener implements ListView.OnItemClickListener{
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
         if(position==0) {
-            Log.d("SIZEABLE1", "The fav list is : " + activity.getLcFav().size() + " The current list size is: " + activity.getLcCurrent().size());
             activity.getLcCurrent().clear();
             activity.getLcCurrent().addAll(activity.getLcFav());
-            Log.d("SIZEABLE2", "The fav list is : " + activity.getLcFav().size() + " The current list size is: " + activity.getLcCurrent().size());
             activity.notifyAdapterOfDataChanged();
             TextView tv_movie= (TextView)activity.findViewById(R.id.tv_Movies);
-            tv_movie.setText("Favorites");
+            tv_movie.setText(activity.getResources().getString(R.string.title_favorites));
         }else if (position==1){
             activity.getLcCurrent().clear();
             activity.getLcCurrent().addAll(activity.getLcMovies());
             activity.notifyAdapterOfDataChanged();
-            //activity.setLcCurrent(activity.getLcMovies());
             TextView tv_movie= (TextView)activity.findViewById(R.id.tv_Movies);
-            tv_movie.setText("On Cinema");
+            tv_movie.setText(activity.getResources().getString(R.string.title_onCinema));
         }else if(position==2){
             activity.getLcCurrent().clear();
             activity.getLcCurrent().addAll(activity.getLcUpcoming());
             activity.notifyAdapterOfDataChanged();
             TextView tv_movie= (TextView)activity.findViewById(R.id.tv_Movies);
-            tv_movie.setText("Upcoming");
+            tv_movie.setText(activity.getResources().getString(R.string.title_upcoming));
         }else if (position==3){
             LocationManager locationManager = (LocationManager) activity.getSystemService(Context.LOCATION_SERVICE);
             boolean gpsON = locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER);
@@ -61,14 +59,23 @@ public class DrawerItemListener implements ListView.OnItemClickListener{
                 if (gpsON && networkON) {
                     new TestLocation(activity).execute();
                 } else {
-                    Toast.makeText(activity, "No Location access!", Toast.LENGTH_LONG).show();
+                    Toast.makeText(activity, activity.getResources().getString(R.string.no_location), Toast.LENGTH_LONG).show();
                 }
             } else {
-                Toast.makeText(activity, "Need to be logged in to see Cinemas!", Toast.LENGTH_LONG).show();
+                Toast.makeText(activity, activity.getResources().getString(R.string.logged_in_see_cinemas), Toast.LENGTH_LONG).show();
             }
-        }else if (position==5){
+        }else if (position==4){
             Intent i = new Intent(activity.getApplicationContext(), AboutActivity.class);
             activity.startActivity(i);
+        }else if(position==5){
+            SharedPreferences sharedPrefs = activity.getSharedPreferences("login", Context.MODE_PRIVATE);
+            SharedPreferences.Editor editor = sharedPrefs.edit();
+            editor.remove("username");
+            editor.remove("password");
+            editor.commit();
+            Toast.makeText(activity, activity.getResources().getString(R.string.logged_out), Toast.LENGTH_LONG).show();
+            activity.setAccess(false);
+           // activity.onBackPressed();
         }
         mDrawerLayout.closeDrawers();
 

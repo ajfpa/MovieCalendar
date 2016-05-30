@@ -64,7 +64,7 @@ public class RegisterActivity extends AppCompatActivity {
                 //checkConnection
                 connection = new CheckConnection(getApplicationContext());
                 if (!connection.isConnected()) {
-                    createToast("No Internet Connection!");
+                    createToast(getResources().getString(R.string.no_connection));
                     return;
                 }
 
@@ -94,7 +94,7 @@ public class RegisterActivity extends AppCompatActivity {
         // check if any of the fields are vaccant
         if(usernameStr.equals("")||passwordStr.equals("")||confirmPasswordStr.equals("")||
                 emailStr.equals("") || firstNameStr.equals("") || lastNameStr.equals("")){
-            createToast("All fields required!");
+            createToast(getResources().getString(R.string.enter_all_fields));
             return false;
         }
 

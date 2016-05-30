@@ -19,6 +19,7 @@ import android.util.Log;
 import android.widget.Toast;
 
 import com.example.andre.MovieCalendar.MapsActivity;
+import com.example.andre.MovieCalendar.R;
 
 /**
  * Created by ANDRE on 16/05/16.
@@ -44,7 +45,7 @@ public class TestLocation extends AsyncTask<String, String, String> implements L
     protected void onPreExecute() {
         super.onPreExecute();
         progressDialog = new ProgressDialog(a);
-        progressDialog.setMessage("Getting location... please wait!");
+        progressDialog.setMessage(a.getResources().getString(R.string.location_loading));
         progressDialog.setIndeterminate(false);
         progressDialog.setCancelable(false);
         progressDialog.show();
@@ -133,7 +134,6 @@ public class TestLocation extends AsyncTask<String, String, String> implements L
     }
 
     protected void onPostExecute(String file_url) {
-        // dismiss the dialog once product deleted
         if(progressDialog !=null) progressDialog.dismiss();
         if (file_url != null){
             Toast.makeText(a, file_url, Toast.LENGTH_LONG).show();

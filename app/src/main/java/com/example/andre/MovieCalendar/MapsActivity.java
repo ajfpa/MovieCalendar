@@ -87,7 +87,7 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
         @Override
         protected void onPreExecute()
         {
-            dialog.setMessage("Getting Theaters from server...");
+            dialog.setMessage(getResources().getString(R.string.cinemas_loading));
             dialog.show();
         }
 

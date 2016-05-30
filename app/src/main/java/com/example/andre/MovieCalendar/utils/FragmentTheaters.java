@@ -48,8 +48,6 @@ public class FragmentTheaters extends DialogFragment {
         final View view = inflater.inflate(R.layout.fragment_theaters, null);
         builder.setView(view);
 
-        // Inflate and set the layout for the dialog
-        // Pass null as the parent view because its going in the dialog layout
         builder.setView(view)
                 // Add action buttons
                 .setPositiveButton("Cinemas", new DialogInterface.OnClickListener() {

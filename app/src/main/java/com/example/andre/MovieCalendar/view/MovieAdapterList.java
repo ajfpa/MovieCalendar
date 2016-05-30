@@ -54,7 +54,6 @@ public class MovieAdapterList extends ArrayAdapter<Movie> {
             convertView = mInflater.inflate(R.layout.fragment_movie_item, parent, false);
 
             holder.name = (TextView) convertView.findViewById(R.id.etNome);
-            //holder.date = (TextView) convertView.findViewById(R.id.etData);
             holder.cover = (ImageView) convertView.findViewById(R.id.iv_movieCover);
 
 
@@ -65,7 +64,6 @@ public class MovieAdapterList extends ArrayAdapter<Movie> {
 
         Movie movie = movieList.get(position);
         holder.name.setText(movie.getNome());
-        //holder.date.setText(movie.getData());
         if(movie.getImageCover()==null) {
             new DownloadImageTask(holder.cover,movie).execute(movie.getCover());
         }
@@ -79,7 +77,6 @@ public class MovieAdapterList extends ArrayAdapter<Movie> {
 
     private static class ViewHolder {
         TextView name;
-        //TextView date;
         ImageView cover;
     }
 

@@ -1,6 +1,7 @@
 package com.example.andre.MovieCalendar;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.DialogFragment;
 import android.support.v7.app.AppCompatActivity;
@@ -21,6 +22,9 @@ import com.example.andre.MovieCalendar.utils.FragmentMovieNotificationPicker;
 import com.example.andre.MovieCalendar.utils.ImdbApiCall;
 import com.example.andre.MovieCalendar.utils.ScheduleMovie;
 import com.example.andre.MovieCalendar.view.Movie;
+import com.facebook.FacebookSdk;
+import com.facebook.share.model.ShareLinkContent;
+import com.facebook.share.widget.ShareDialog;
 
 public class DetailsActivity extends AppCompatActivity {
 
@@ -38,7 +42,6 @@ public class DetailsActivity extends AppCompatActivity {
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.menu_movie, menu);
 
         if(favorite)
@@ -74,6 +77,15 @@ public class DetailsActivity extends AppCompatActivity {
                 scheduleMovie.unbindService();
                 onBackPressed();
                 break;
+            case R.id.share:
+                ShareDialog shareDialog = new ShareDialog(this);
+                ShareLinkContent linkContent = new ShareLinkContent.Builder()
+                        .setContentTitle("Vou ver o: " + movie.getNome())
+                        .setContentUrl(Uri.parse(movie.getRedirectUrl()))
+                        .build();
+
+                shareDialog.show(linkContent);
+
         }
         return super.onOptionsItemSelected(item);
     }
@@ -83,6 +95,7 @@ public class DetailsActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.movie_view);
 
+        FacebookSdk.sdkInitialize(getApplicationContext());
 
         scheduleMovie = new ScheduleMovie(this);
         scheduleMovie.bindService();
@@ -109,9 +122,9 @@ public class DetailsActivity extends AppCompatActivity {
 
         tvNome.setText(movie.getNome());
         tvData.setText(movie.getData());
-        tvDirector.setText("Director: "+ movie.getDirector());
-        tvStarring.setText("Starring: " + movie.getStarring());
-        tvIntro.setText("Description:\n" + movie.getIntro());
+        tvDirector.setText(getResources().getString(R.string.director)+ movie.getDirector());
+        tvStarring.setText(getResources().getString(R.string.starring) + movie.getStarring());
+        tvIntro.setText(getResources().getString(R.string.description) + movie.getIntro());
         tvStarring.setMovementMethod(new ScrollingMovementMethod());
         tvIntro.setMovementMethod(new ScrollingMovementMethod());
         if(movie.getImageCover()==null){
@@ -121,19 +134,10 @@ public class DetailsActivity extends AppCompatActivity {
         else
             ivCover.setImageBitmap(movie.getImageCover());
 
-       /* id = i.getLongExtra("id", 0);
-        tvNome.setText(i.getStringExtra("nome"));
-        tvData.setText(i.getStringExtra("data"));
-        tvDirector.setText("Director: " + i.getStringExtra("director"));
-        tvStarring.setText("Starring: " + i.getStringExtra("starring"));
-        tvIntro.setText("Description: " + i.getStringExtra("intro"));
-        String cover = i.getStringExtra("cover");
-        new DownloadImageTask(ivCover).execute(cover);*/
-
         setResult(RESULT_NOT_CHANGED);
     }
 
-    // Adiciona o contacto e adiciona-o Ã  ListView
+    // Adiciona o contacto e adiciona-o a  ListView
     public void addFavorite() {
         if(!favorite){
             favorite = true;
@@ -144,13 +148,13 @@ public class DetailsActivity extends AppCompatActivity {
             }else{
                 setResult(2);
             }
-            Toast.makeText(getApplicationContext(), "Movie added to favorites", Toast.LENGTH_SHORT).show();
+            Toast.makeText(getApplicationContext(), getResources().getString(R.string.added_favorites), Toast.LENGTH_SHORT).show();
         }
 
         else{
             favorite = false;
             setResult(0);
-            Toast.makeText(getApplicationContext(), "Movie remove from favorites", Toast.LENGTH_SHORT).show();
+            Toast.makeText(getApplicationContext(), getResources().getString(R.string.removed_favorites), Toast.LENGTH_SHORT).show();
 
         }
 

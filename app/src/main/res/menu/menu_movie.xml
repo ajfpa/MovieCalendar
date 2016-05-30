@@ -4,6 +4,11 @@
     xmlns:tools="http://schemas.android.com/tools"
     tools:context=".DetailsActivity">
 
+    <item
+        android:id="@+id/share"
+        android:icon="@mipmap/ic_share_black_24dp"
+        app:showAsAction="always"/>
+
     <item android:id="@+id/fav"
         android:icon="@mipmap/ic_not_favorite"
         android:title="About"

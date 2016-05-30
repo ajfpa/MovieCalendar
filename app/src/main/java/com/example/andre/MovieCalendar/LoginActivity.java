@@ -1,7 +1,9 @@
 package com.example.andre.MovieCalendar;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AutoCompleteTextView;
@@ -36,6 +38,12 @@ public class LoginActivity extends Activity {
         buttonLogin = (Button) findViewById(R.id.login);
         guestButton = (Button) findViewById(R.id.guest);
         aboutButton = (ImageButton) findViewById(R.id.aboutButton);
+        SharedPreferences sharedPrefs = getSharedPreferences("login", Context.MODE_PRIVATE);
+        if(sharedPrefs.contains("username") && sharedPrefs.contains("password")){
+            //new TestLogin(LoginActivity.this, sharedPrefs.getString("username",""), sharedPrefs.getString("password","")).execute();
+            email.setText(sharedPrefs.getString("username",""));
+            pass.setText(sharedPrefs.getString("password",""));
+        }
 
         buttonLogin.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -48,7 +56,7 @@ public class LoginActivity extends Activity {
 
                     if(userText.equals("") || passText.equals("")){
                         if (toast == null || toast.getView().getWindowVisibility() != View.VISIBLE) {
-                            toast = Toast.makeText(getApplicationContext(), "Enter all fields!", Toast.LENGTH_LONG);
+                            toast = Toast.makeText(getApplicationContext(), getResources().getString(R.string.enter_all_fields), Toast.LENGTH_LONG);
                             toast.show();
                         }
                     }else {
@@ -57,7 +65,7 @@ public class LoginActivity extends Activity {
                 }else{
 
                     if (toast == null || toast.getView().getWindowVisibility() != View.VISIBLE) {
-                        toast = Toast.makeText(getApplicationContext(), "No Internet Connection", Toast.LENGTH_LONG);
+                        toast = Toast.makeText(getApplicationContext(), getResources().getString(R.string.no_connection), Toast.LENGTH_LONG);
                         toast.show();
                     }
 

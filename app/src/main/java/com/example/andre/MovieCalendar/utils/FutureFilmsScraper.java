@@ -93,12 +93,17 @@ public class FutureFilmsScraper extends AsyncTask<Void, Void, Void> {
                 //Log.d("OUTPUT", "Size is: " + htmlSecondary.size());
 
                 for (int count = 0; count < htmlContent.size(); count++) {
-                    String title = htmlContent.get(count).select("div.filmeListaInfo > h3 > a > span").text();
+                    Elements titles =htmlContent.get(count).select("div.filmeListaInfo > h3 > a > span");
+                    String title="";
+                    if(titles.size()>1)
+                        title = titles.first().ownText();
+                    else
+                        title=titles.text();
+
                     String coverUrl = htmlContent.get(count).select("div.filmeListaPoster > a > img").attr("abs:src");
                     String redirectUrl = htmlContent.get(count).select("div.filmeListaPoster > a").attr("abs:href");
                     if (!webList.containsKey(title) && title != null && redirectUrl != null && coverUrl!=null) {
                         webList.put(title, new Movie(title,coverUrl, redirectUrl,false));
-                        //Log.d("OUTPUT", title +  " : " + redirectUrl);
                     }
                 }
             }
