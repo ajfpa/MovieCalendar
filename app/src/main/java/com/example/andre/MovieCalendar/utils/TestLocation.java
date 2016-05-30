@@ -30,6 +30,7 @@ public class TestLocation extends AsyncTask<String, String, String> implements L
     Location location; // location
     double latitude; // latitude
     double longitude; // longitude
+    String nome;
 
     private ProgressDialog progressDialog = null;
     private Activity a = null;
@@ -39,6 +40,11 @@ public class TestLocation extends AsyncTask<String, String, String> implements L
 
     public TestLocation(Activity a) {
         this.a = a;
+    }
+
+    public TestLocation(Activity a, String nome) {
+        this.a = a;
+        this.nome  = nome;
     }
 
     @Override
@@ -122,6 +128,7 @@ public class TestLocation extends AsyncTask<String, String, String> implements L
                 Intent i = new Intent(a.getApplicationContext(), MapsActivity.class);
                 i.putExtra("latitude", latitude);
                 i.putExtra("longitude", longitude);
+                i.putExtra("nome", nome);
                 a.startActivity(i);
             } else {
                 //Inform that Location is OFF!

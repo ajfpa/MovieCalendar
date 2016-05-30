@@ -35,6 +35,7 @@ import java.util.Map;
  */
 public class MapsActivity extends AppCompatActivity implements OnMapReadyCallback {
     public double latitude, longitude;
+    private String nome;
     public GoogleMap g_map;
     public Map<Marker, Integer> hmap;
     public static final int RANGE = 50000;
@@ -52,6 +53,7 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
         Intent i = getIntent();
         latitude = i.getDoubleExtra("latitude", 0);
         longitude = i.getDoubleExtra("longitude", 0);
+        nome = i.getStringExtra("nome");
 
         MapFragment mapFragment = (MapFragment)
                 getFragmentManager().findFragmentById(R.id.mapView);
@@ -61,7 +63,6 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
         g_map.setOnInfoWindowClickListener(new GoogleMap.OnInfoWindowClickListener() {
             @Override
             public void onInfoWindowClick(Marker marker) {
-                Log.i("guideMe", "Click on marker with ID = " + hmap.get(marker));
                 Intent i = new Intent(MapsActivity.this, CinemaActivity.class);
                 i.putExtra("id", hmap.get(marker));
                 startActivity(i);
@@ -74,7 +75,9 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
     public void onMapReady(GoogleMap map) {
         LatLng myPos = new LatLng(latitude, longitude);
         map.setMyLocationEnabled(true);
-        map.moveCamera(CameraUpdateFactory.newLatLngZoom(myPos, 13));
+        if(nome == null) {
+            map.moveCamera(CameraUpdateFactory.newLatLngZoom(myPos, 13));
+        }
         new getPOIs().execute();
     }
 
@@ -139,6 +142,14 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
                             .position(new LatLng(Double.parseDouble(t_poi.getString("latitude")), Double.parseDouble(t_poi.getString("longitude"))))
                             .title(t_poi.getString("name"))
                             .snippet(t_poi.getString("location"));
+
+
+
+                    if(t_poi.getString("name").equals(nome)) {
+                        g_map.setMyLocationEnabled(true);
+                        LatLng myPos = new LatLng(Double.parseDouble(t_poi.getString("latitude")), Double.parseDouble(t_poi.getString("longitude")));
+                        g_map.moveCamera(CameraUpdateFactory.newLatLngZoom(myPos, 13));
+                    }
 
                     marker.icon(BitmapDescriptorFactory.fromResource(R.mipmap.ic_cinema_marker));
 

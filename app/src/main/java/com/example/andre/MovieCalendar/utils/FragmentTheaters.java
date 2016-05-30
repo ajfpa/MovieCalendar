@@ -4,7 +4,9 @@ package com.example.andre.MovieCalendar.utils;
 
 import android.app.Activity;
 import android.app.Dialog;
+import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.DialogFragment;
 import android.support.v7.app.AlertDialog;
@@ -12,16 +14,19 @@ import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
 import com.example.andre.MovieCalendar.DetailsActivity;
 import com.example.andre.MovieCalendar.R;
+import com.example.andre.MovieCalendar.view.Movie;
 import com.example.andre.MovieCalendar.view.TheaterAdapterList;
 import com.example.andre.MovieCalendar.view.TheaterItem;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.ExecutionException;
 
 /**
  * Created by ANDRE on 26/05/16.
@@ -73,6 +78,20 @@ public class FragmentTheaters extends DialogFragment {
         adapterList = new TheaterAdapterList(builder.getContext().getApplicationContext(),setTheaters(theaters));
         list.setAdapter(adapterList);
 
+        list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, final View view, int position, long id) {
+
+                Log.i("Click", "Click");
+
+                TheaterItem c = (TheaterItem) list.getItemAtPosition(position);
+
+                if (c.getNome() != null) {
+                    new TestLocation(a, c.getNome()).execute();
+                }
+            }
+        });
+
 
         return builder.create();
     }
@@ -82,8 +101,11 @@ public class FragmentTheaters extends DialogFragment {
 
         for (int i = 0; i < theaters.size(); i++){
             String nome = theaters.get(i).split(" - ")[0];
-            //String location = theaters.get(i).split(" - ")[1];
-            list.add(new TheaterItem(i, nome, "Lisboa"));
+            String location = "";
+            if(theaters.get(i).split(" - ").length > 1) {
+                location = theaters.get(i).split(" - ")[1];
+            }
+            list.add(new TheaterItem(i, nome, location));
         }
 
         return list;
