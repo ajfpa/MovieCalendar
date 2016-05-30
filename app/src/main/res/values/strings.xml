@@ -54,6 +54,7 @@
     <string name="theaters">Theaters</string>
     <string name="logout">Logout</string>
     <string name="a_new_password_will_be_sent_to_your_email_address">A new password will be sent to your email address.</string>
+    <string name="enter_as_guest">Enter as guest</string>
     <string-array name="side_bar_option">
         <item>@string/title_favorites</item>
         <item>@string/title_onCinema</item>
