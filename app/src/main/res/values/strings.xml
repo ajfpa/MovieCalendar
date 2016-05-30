@@ -50,12 +50,17 @@
     <string name="first_name">First Name</string>
     <string name="last_name">Last Name</string>
     <string name="on_diplay_at">On diplay at:</string>
+    <string name="about">About</string>
+    <string name="theaters">Theaters</string>
+    <string name="logout">Logout</string>
+    <string name="a_new_password_will_be_sent_to_your_email_address">A new password will be sent to your email address.</string>
     <string-array name="side_bar_option">
-        <item>Favorites</item>
-        <item>Now Playing</item>
-        <item>Opening Soon</item>
-        <item>Cinemas</item>
-        <item>About</item>
-        <item>Logout</item>
+        <item>@string/title_favorites</item>
+        <item>@string/title_onCinema</item>
+        <item>@string/title_upcoming</item>
+        <item>@string/theaters</item>
+        <item>@string/about</item>
+        <item>@string/logout</item>
     </string-array>
+
 </resources>

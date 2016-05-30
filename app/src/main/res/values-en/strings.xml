@@ -47,4 +47,8 @@
     <string name="title_upcoming">Upcoming</string>
     <string name="username">Username</string>
     <string name="drawer_close">Close navigation drawer</string>
+    <string name="about">About</string>
+    <string name="theaters">Theaters</string>
+    <string name="logout">Logout</string>
+    <string name="a_new_password_will_be_sent_to_your_email_address">A new password will be sent to your email address.</string>
 </resources>

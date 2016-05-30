@@ -44,4 +44,9 @@
     <string name="title_onCinema">Em exibição</string>
     <string name="title_upcoming">Brevemente</string>
     <string name="username">Nome de utilizador</string>
+    <string name="about">Acerca de </string>
+    <string name="theaters">Cinemas</string>
+    <string name="logout">Logout</string>
+    <string name="forgot_password">ESQUECEU-SE DA SUA PASSWORD?</string>
+    <string name="a_new_password_will_be_sent_to_your_email_address">Uma nova password vai ser enviada para o seu e-mail.</string>
 </resources>
