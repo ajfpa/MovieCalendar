@@ -75,16 +75,18 @@
                 android:text="@string/andre_gloria"
                 android:id="@+id/A60176"
                 android:layout_gravity="center_horizontal"
-                android:layout_marginTop="20dp" />
+                android:layout_marginTop="20dp"
+               />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textAppearance="?android:attr/textAppearanceMedium"
-                android:text="@string/antonio_pereira"
-                android:id="@+id/A62382"
+                android:text="@string/antoniopereira"
+                android:id="@+id/A60382"
                 android:layout_gravity="center_horizontal"
-                android:layout_marginTop="10dp" />
+                android:layout_marginTop="10dp"
+                />
         </LinearLayout>
 
     </LinearLayout>
